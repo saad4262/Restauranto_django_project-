@@ -1,0 +1,34 @@
+<div class="container2  pr-2 py-10   sm:p-20    lg:flex-row flex-col gap-4   justify-center items-center   flex-wrap xl:flex-nowrap ">
+    {% comment %} <h1 class="text-5xl my-5 font-bold text-yellow-500 flex  justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">ABOUT US</h1> {% endcomment %}
+    <div class="full-con2 flex lg:flex-row flex-col gap-4   justify-center items-center   flex-wrap xl:flex-nowrap">
+        
+        {% for menu1 in AboutUsdata %}
+        <article class="card sm:w-[20rem] w-72 rounded-xl ">
+      <div class="temporary_text">
+        {% if menu1.image %}
+
+          <img src="{{ menu1.image.url }}" alt="{{ menu1.title }}">
+        {% else %}
+      <p>No image available</p>
+        {% endif %}
+      </div>
+  <div class="card_content">
+      <span class="card_title  transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 cursor-pointer">{{menu1.title}}</span>
+          <span class="card_subtitle">{{menu1.subtitle}}</span>
+          <p class="card_description  text-gray-500">{{menu1.description}}<br>
+            {% if menu1.title == 'Our Story' %}
+            <a class="text-blue-600" href="{% url 'login'  %}">Read more</a>
+            {% elif menu1.title == 'Master Chefs' %}
+            <a class="text-blue-600" href="{% url 'chefs'  %}">Read more</a>
+            {% elif menu1.title == 'Special Deals' %}
+            <a class="text-blue-600" href="{% url 'deals'  %}">Read more</a>
+            {% elif menu1.title == 'Online Order' %}
+            <a class="text-blue-600" href="{% url 'menu'  %}">Read more</a>
+            {% endif %}
+            </p>
+      
+        </div>
+    </article>
+    {% endfor %}
+</div>
+</div>

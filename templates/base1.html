@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Fast Food</title>
+    {% load static %}
+    {% load static tailwind_tags %}
+     <link rel="stylesheet" href="{% static 'MenuItems.css' %}">
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+     <SCRIPT type="text/javascript" >
+         let user= '{{request.user}}'
+         
+         function getToken(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                var cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+        var csrftoken = getToken('csrftoken');
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const searchForm = document.querySelector('.search form');
+            searchForm.addEventListener('submit', (event) => {
+                event.preventDefault();
+                const searchInput = document.querySelector('.search input');
+                const searchValue = searchInput.value.trim();
+                // Redirect to the menu view with the search query as a parameter
+                window.location.href = `/menu_view/?search=${searchValue}`;
+            });
+        });
+        
+     </SCRIPT>
+</head>
+<body>
+  {% tailwind_css %}
+  
+<div class="flex flex-row justify-around lg:my-5 my-14 lg:ml-96 ml-56 ">
+    <form action="" method="GET" class="search">
+        <label>
+            <input type="text" name="search" placeholder="Search here" value="{{ request.GET.search }}">
+            <button type="submit"><ion-icon name="search-outline"></ion-icon></button>
+        </label>
+    </form>
+    
+    <div class="flex self-end  gap-2 mb-6 ">
+        <img src="/static/images/profile.svg" alt="">
+        <a href="{% url 'cart' %}"><img src="/static/images/cart.svg" alt=""></a> 
+        <p>{{ cartItems }}</p>
+    </div>
+</div>
+
+<div class="flex justify-center gap-4 ">
+    
+        <div class="flex">
+            <h1 class=" heading font-black font-bolder font-serif align-middle justify-center ">Our Menu</h1>
+            </div>
+          
+    </div>
+    <div class="selector flex justify-center gap-6 font-bold">
+
+    <a href="?category=FastFood"><button class="btn" {% if category == "FastFood" %} {% endif %}> Fast Food </button> </a>
+    <a href="?category=Continental"><button class="btn" {% if category == "Continental" %}  {% endif %} >Continental </button> </a> 
+    <a href="?category=PakistaniCuisine"><button class="btn" {% if category == "PakistaniCuisine" %}  {% endif %}>Pakistani Cuisine</button> </a>
+    <a href="?category=Desserts"><button class="btn" {% if category == "Desserts" %}  {% endif %}>Desserts</button> </a>
+
+    </div>
+  
+  <div class="Main flex  align-middle justify-center box-border ">
+
+
+     <div id="mainContainer" class=" Container w-auto flex   justify-center lg:px-32  flex-wrap gap-9">
+                {% for a in product_messages %}
+                   
+         <div class="card md:h-80 md:w-72 h-96 w-96">
+             <div class="card-details">
+                 {% if a.image %}
+                 <img class="Product-img  "  name="product-img" alt="burger image"  src="{{ a.image.url }}">
+                     {% else %}
+                     <p>No image available</p>
+                 {% endif %}
+                 <div class="Product-name"> {{ a.product_name }}</div>
+                 <div class="Product-ingredients"> {{ a.ingredients }}</div>
+
+                 <span class="Product-Price"> {{ a.price }}</span>
+             </div>
+             <button class="card-button " id="popupTrigger-{{ forloop.counter }}" > view details </button>
+         </div>
+                    
+
+
+             <div class="PopupDiv flex flex-col  "  id="popupContainer-{{ forloop.counter }}">
+             <div class="align-baseline self-end p-3"><img src="/static/images/cancel.svg" alt="" class="close closeTrigger hover:cursor-pointer"  id="closeTrigger-{{ forloop.counter }}"  > </div>
+              <div class="flex p-2 align-middle">
+
+             
+             <div class="flex flex-col  px-5">
+                <div class="flex gap-20 text-wrap ">
+                 <div class="Popup-img h-48 bg-cover w-48 overflow-hidden  "><img src="{{ a.image.url }}" alt="burger"></div>
+                 <div class="Popup-detail w-56">{{ a.product_description }}</div>
+                </div>
+                 <div class="Product-name flex justify-start items-start">{{ a.product_name }}</div>
+                 <span class="Product-Price relative  w-5/12"> {{ a.price }}</span>
+                         
+                  
+                 <a class="fancy w-10/12" href="#"> <button class="CartBtn">
+                      <span class="top-key"></span>
+                      <span data-product="{{ a.id }}" data-action="add" class="text update-cart "  type="submit">Add to Cart</span>
+                      <span class="bottom-key-1"></span>
+                      <span class="bottom-key-2"></span> 
+                      </button>
+                 </a> 
+             </div>
+              
+              </div>
+
+             </div>
+                {% endfor %}
+     
+     </div>
+   
+
+
+</div>
+<div class="align-middle justify-center items-center py-5">
+  <div class=" CartDiv flex justify-around items-center w--full align-middle p-2.5 mx-36 bg-yellow-500 self-center font-bold  text-white">
+      <div class=" flex gap-1.5">
+          <span>Items {{ order.get_cart_items }}</span>
+          <span> | </span>
+          <span>Amount {{ order.get_cart_total }}</span>
+      </div>
+      
+      <div class=" ">
+          <a href="{% url 'cart'  %}"> <button>View Cart</button> </a>
+      </div>
+      
+  </div>
+  
+ </div> 
+ 
+
+<script src="/static/fastfood.js">
+    let user = '{{request.user}}'
+</script>
+<script src="/static/cart1.js">
+</script>
+
+<script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+<script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+</body>
+</html>

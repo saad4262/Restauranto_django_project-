@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Checkout</title>
+    {% load static %}
+    {% load static tailwind_tags %}
+     <link rel="stylesheet" href="/static/MenuItems.css" >
+</head>
+<body>
+  {% tailwind_css %}
+
+<div class="p-10 ">
+    <h1 class="mb-8 font-extrabold text-4xl">Checkout</h1>
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+
+            <form method="post" action="{% url 'checkout' %}" >
+                 {% csrf_token %}
+               <div class="mt-4 flex flex-col bg-gray-100 rounded-lg p-4 shadow-sm">
+               <h2 class="text-black font-bold text-lg">Shipping Label Address Form</h2>
+
+                   <div class="mt-4">
+                      <label class="text-black" for="name">Name</label>
+                       <input name="name" id="name1" placeholder="Your name" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                   </div>
+                    <div class="mt-4">
+                       <label class="text-black" for="Email">Email</label>
+                       <input  name="email" placeholder="Enter email" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="email">
+                    </div>
+                     <div class="mt-4">
+                       <label class="text-black" for="Email">Phone number</label>
+                       <input  name="number" placeholder="Enter number" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="number">
+                    </div>
+
+                <div class="mt-4">
+                 <label class="text-black" for="address">Address</label>
+                 <textarea  name="address" placeholder="Your address" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" id="address"></textarea>
+                </div>
+
+                <div class="mt-4 flex flex-row space-x-2">
+                  <div class="flex-1">
+                  <label class="text-black" for="city">City</label>
+                   <input name="city" placeholder="Your city" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" id="city" type="text">
+                  </div>
+
+                  <div class="flex-1">
+                   <label class="text-black" for="province">Province</label>
+                    <input  name="province" placeholder="Your province" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" id="province" type="text">
+                   </div>
+                </div>
+
+                 <div class="mt-4 flex flex-row space-x-2">
+                 <div class="flex-1">
+                     <label class="text-black" for="zip">ZIP</label>
+                     <input name="zipcode" placeholder="Your ZIP code" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" id="zip" type="text">
+                 </div>
+                     <div class="mt-4">
+                       <label class="text-black" for="instructions">other instructions</label>
+                         <input name="instruction" placeholder="order instructions" class="w-full bg-white rounded-md border-gray-300 text-black px-2 py-1" type="text">
+                     </div>
+
+                  </div>
+
+                      <div class="mt-4 flex justify-end">
+                        <button class="bg-white text-black rounded-md px-4 py-1 hover:bg-gray-200 hover:text-gray-900" type="submit">Submit</button>
+                      </div>
+               </div>
+
+            </form>
+
+            <aside class="">
+               <h2 class="text-black font-bold text-lg">Order summary</h2>
+                  <div class="bg-gray-100 p-8 rounded">
+
+                    <div class="flow-root">
+
+                <ul class="-my-8">
+                   {% for item in items %}
+                  <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                    <div class="shrink-0">
+                    <img class="h-24 w-24 max-w-full rounded-lg object-cover" src="{{ item.product.image.url }}" alt="">
+                    </div>
+
+                    <div class="relative flex flex-1 flex-col justify-between">
+                      <div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
+                        <div class="pr-8 sm:pr-5">
+                          <p class="text-base font-semibold text-gray-900">{{ item.product.product_name }}</p>
+                          <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">Pkr {{ item.product.price }}</p>
+                        </div>
+
+                        <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                          <p class="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">{{ item.get_total }} Pkr</p>
+
+                          <div class="sm:order-1">
+                            <div class="mx-auto flex h-8 items-stretch text-gray-600">
+                              <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{{ item.quantity }}</div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+
+                     
+                    </div>
+                  </li>
+
+                    {% endfor %}
+                </ul>
+              </div>
+              
+
+                </div>
+            </aside>
+            <div class="mt-6 border-t border-b py-2">
+              <div class="flex items-center justify-between">
+                <p class="text-sm text-gray-400">Subtotal</p>
+                <p class="text-lg font-semibold text-gray-900">Pkr {{ order.get_cart_total }}</p>
+              </div>
+              <div class="flex items-center justify-between">
+                <p class="text-sm text-gray-400">Shipping</p>
+                <p class="text-lg font-semibold text-gray-900">99.0</p>
+              </div>
+              <div class="mt-6 flex items-center justify-between">
+                <p class="text-sm font-medium text-gray-900">Total</p>
+                <p class="text-2xl font-semibold text-gray-900"><span class="text-xs font-normal text-gray-400">Pkr</span>  {{ order.get_cart_total }} </p>
+              </div>
+            </div>
+  
+
+    </div>
+</div>
+
+
+
+
+
+  <script src="/static/fastfood.js"></script>
+</body>
+</html>

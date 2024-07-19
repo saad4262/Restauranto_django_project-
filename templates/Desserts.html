@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Desserts </title>
+    {% load static %}
+    {% load static tailwind_tags %}
+     <link rel="stylesheet" href="/static/MenuItems.css" >
+     
+</head>
+<body>
+  {% tailwind_css %}
+  
+   <h1 class=" heading font-black font-bolder font-serif align-middle justify-center " >Our Menu</h1>
+  <div class="selector flex justify-center gap-6 font-bold"> 
+    <a href="{% url 'fastfood' %}"> <button class="btn"   > Fast Food </button> </a>
+    <a href="{% url 'Continental' %}"><button class="btn"  >Continental </button> </a> 
+    <a href="{% url 'PakistaniCuisine' %}"> <button class="btn">Pakistani Cuisine</button> </a>
+    <a href="{% url 'Desserts' %}">  <button class="btn" >Desserts</button> </a>
+      
+  </div>
+  
+<h1>this is desserts page</h1>
+
+
+
+<script src="/static/fastfood.js"></script>
+
+</body>
+</html>

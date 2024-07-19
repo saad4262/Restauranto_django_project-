@@ -1,0 +1,177 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Category{% endblock title %}
+
+{% block main-content %}
+    <div class="container my-5">
+        <div class="row">
+            <div class="col-sm-3">
+                <div class="list-group">
+                {% for val in title  %}
+                <a href="{% url 'category-title' val.title %}" class="list-group-item list-group-item-action" aria-current="true">{{val.title}}</a>
+                {% endfor %}
+                </div>
+            </div>
+            <div class="col-sm-9">
+                <div class="row">
+                   <div id="mainContainer" class=" Container w-2/3 flex  justify-start     lg:gap-9"> 
+                      {% for a in products %}
+         <div class="card">
+             <div class="card-details">
+                 {% if a.image %}
+                 <img class="Product-img"  name="product-img" alt="burger image"  src="{{ a.image.url }}">
+                     {% else %}
+                     <p>No image available</p>
+                 {% endif %}
+                 <div class="Product-name"> {{ a.product_name }}</div>
+                 <div class="Product-ingredients"> {{ a.ingredients }}</div>
+
+                 <span class="Product-Price"> {{ a.price }}</span>
+             </div>
+             <button class="card-button " id="popupTrigger-{{ forloop.counter }}" > view details </button>
+         </div>
+                    
+
+
+             <div class="PopupDiv flex flex-col  "  id="popupContainer-{{ forloop.counter }}">
+             <div class="align-baseline self-end p-3"><button class="close closeTrigger"  id="closeTrigger-{{ forloop.counter }}"  > x </button></div>
+              <div class="flex p-2 align-middle">
+
+             <div class="SideMenu w-1.5/3 gap-6 mx-2 ">
+
+
+                 <div class="Option Collapse  ">
+                    <div class=" flex ">
+                     <span>Select meal type </span>
+                     <img class=" collapse__link self-end" src="/static/icons/dropDown.svg" alt="down arrow">
+                    </div> 
+                     <div class="collapse__menu flex flex-col ">
+                         
+                         <div class="radio-buttons-container1">
+                             <div class="radio-button1">
+                                 <input name="radio-group1" id="radio2" class="radio-button__input1" type="radio">
+                                 <label for="radio2" class="radio-button__label1"><span class="radio-button__custom1"></span>
+                                     Burger
+                                 </label>
+                             </div>
+                             <div class="radio-button1">
+                                 <input name="radio-group1" id="radio1" class="radio-button__input1" type="radio">
+                                 <label for="radio1" class="radio-button__label1"><span class="radio-button__custom1"></span>
+                                     Make it a meal
+                                 </label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="Option Collapse ">
+                    <div class=" flex ">
+                     <span>Select drink </span>
+                     <img class=" collapse__link self-end" src="/static/icons/dropDown.svg" alt="down arrow">
+                    </div> 
+                     <div class="collapse__menu flex flex-col ">
+                         <div class="radio-buttons-container2">
+                             <div class="radio-button2">
+                                 <input name="radio-group2" id="radio3" class="radio-button__input2" type="radio">
+                                 <label for="radio3" class="radio-button__label2"><span class="radio-button__custom2"></span>
+                                     Gourmet Cola
+                                 </label>
+                             </div>
+                             <div class="radio-button2">
+                                 <input name="radio-group2" id="radio4" class="radio-button__input2" type="radio">
+                                 <label for="radio4" class="radio-button__label2"><span class="radio-button__custom2"></span>
+                                     Sprite
+                                 </label>
+                             </div>
+                             <div class="radio-button2">
+                                 <input name="radio-group2" id="radio5" class="radio-button__input2" type="radio">
+                                 <label for="radio5" class="radio-button__label2"><span class="radio-button__custom2"></span>
+                                     Fanta
+                                 </label>
+                             </div>
+                             <div class="radio-button2">
+                                 <input name="radio-group2" id="radio6" class="radio-button__input2" type="radio">
+                                 <label for="radio6" class="radio-button__label2"><span class="radio-button__custom2"></span>
+                                     Apple Juice
+                                 </label>
+                             </div>
+                             <div class="radio-button2">
+                                 <input name="radio-group2" id="radio7" class="radio-button__input2" type="radio">
+                                 <label for="radio7" class="radio-button__label2"><span class="radio-button__custom2"></span>
+                                     Sweet Tea
+                                 </label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+                 <div class="Option Collapse overflow-auto ">
+                     <div class=" flex ">
+                     <span>Add on </span>
+                     <img class=" collapse__link self-end" src="/static/icons/dropDown.svg" alt="down arrow">
+                    </div> 
+                     <div class="collapse__menu  flex flex-col">
+                         <div class="radio-buttons-container3">
+                             <div class="radio-button3">
+                                 <input name="radio-group3" id="radio8" class="radio-button__input3" type="radio">
+                                 <label for="radio8" class="radio-button__label3"><span class="radio-button__custom3"></span>
+                                     Mayo Dip
+                                 </label>
+                             </div>
+                             <div class="radio-button3">
+                                 <input name="radio-group3" id="radio9" class="radio-button__input3" type="radio">
+                                 <label for="radio9" class="radio-button__label3"><span class="radio-button__custom3"></span>
+                                     Cheese Dip
+                                 </label>
+                             </div>
+                             <div class="radio-button3">
+                                 <input name="radio-group3" id="radio10" class="radio-button__input3" type="radio">
+                                 <label for="radio10" class="radio-button__label3"><span class="radio-button__custom3"></span>
+                                     Chipotle Dip
+                                 </label>
+                             </div>
+                             <div class="radio-button3">
+                                 <input name="radio-group3"  class="radio-button__input3" type="radio">
+                                 <label class="radio-button__label3"><span class="radio-button__custom3"></span>
+                                     Coleslaw
+                                 </label>
+                             </div>
+                         </div>
+                     </div>
+                 </div>
+
+             </div>
+
+             <div class=" flex flex-col w-1/2">
+                 <div class="Popup-img "><img name="product-img" src="{{ a.image.url }}" alt="burger"></div>
+                 <div class="Product-name">{{ a.product_name }}</div>
+                 <span class="Product-Price relative  w-5/12"> {{ a.price }}</span>
+                 <div class="Popup-detail">{{ a.product_description }}</div>
+                   <div class="counter">
+                       <button class="CountBtn positive update-cart " id="CountPlus" onclick="countInc()">+</button>
+                       <label class="CounterValue font-bold" id="countValue" name="countValue">{{ item.quantity }}</label>
+                       <button class="CountBtn negative update-cart" id="CountMinus" onclick="countDec()">-</button>
+                   </div>
+                 <a class="fancy w-10/12" href="#"> <button class="CartBtn">
+                      <span class="top-key"></span>
+                      <span data-product="{{ a.id }}" data-action="add" class="text update-cart" >Add to Cart</span>
+                      <span class="bottom-key-1"></span>
+                      <span class="bottom-key-2"></span> 
+                      </button>
+                 </a> 
+             </div>
+              
+              </div>
+
+             </div>
+                
+                {% endfor %}
+     
+                   </div>    
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock main-content %}

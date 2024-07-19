@@ -1,0 +1,336 @@
+{% comment %} {% extends "base.html" %} {% endcomment %}
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} {% load static tailwind_tags %} {% endcomment %}
+{% comment %} {% include "header.html" %} {% endcomment %}
+{% comment %} {% load static %} {% endcomment %}
+{% comment %} {% block content %}  {% endcomment %}
+
+
+
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Restauranto</title>
+    <link rel="stylesheet" href="/static/style.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+
+    {% load static tailwind_tags %}
+
+</head>
+
+<style>
+    .login_img_section {
+    background: linear-gradient(rgba(2,2,2,.7),rgba(0,0,0,.7)),url(/static/images/bg-3.avif);
+    background-position: center;
+  background-size: cover;
+
+  
+
+
+    }
+
+
+  .button1 {
+    border: 2px solid #EAB308;
+    background-color: #EAB308;
+    border-radius: 0.9em;
+    padding: 0.8em 1.2em 0.8em 1em;
+    transition: all ease-in-out 0.2s;
+    font-size: 16px;
+   }
+   
+   .button1 span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: #fff;
+    font-weight: 600;
+   }
+   
+   .button1:hover {
+    background-color: #EAB308;
+   }
+  
+  
+  </style>
+<body>
+    {% tailwind_css %}
+    
+    {% comment %} <div class="image-container "> {% endcomment %}
+        <div class="image-container1   h-96 xl:mx-20">
+
+<div class="con-about  ">
+    <nav class="flex justify-between  ">
+        <img class=" px-7 my-5 w-64 sm:w-80" src="/static/images/logo.png" alt="">
+        <img name="nav" class="nav-bar filter brightness-0 invert absolute my-5 right-5 sm:right-10 lg:hidden" src="/static/images/nav.svg" alt="">
+        <div class="lg:min-h-fit  lg:static absolute lg:bg-transparent bg-[#0F172B] h-full w-1/2 flex z-10 items-start  lg:justify-end justify-start hidden  right-0 " id="navMenu">
+            <ul class=" nav-ul font-bold lg:flex lg:gap-8 text-white lg:font-bold my-20 lg:my-6 lg:px-7  ">
+              <li class="transition duration-3000 ease-in-out   hover:scale-105  hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5 "><a href="{% url 'home' %}"> Home </a><svg class="filter brightness-0 invert block lg:hidden ml-8 sm:ml-[170px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M9.06165 4.82633L3.23911 9.92134C2.7398 10.3583 3.07458 11.1343 3.76238 11.1343C4.18259 11.1343 4.52324 11.4489 4.52324 11.8371V15.0806C4.52324 17.871 4.52324 19.2662 5.46176 20.1331C6.40029 21 7.91082 21 10.9319 21H13.0681C16.0892 21 17.5997 21 18.5382 20.1331C19.4768 19.2662 19.4768 17.871 19.4768 15.0806V11.8371C19.4768 11.4489 19.8174 11.1343 20.2376 11.1343C20.9254 11.1343 21.2602 10.3583 20.7609 9.92134L14.9383 4.82633C13.5469 3.60878 12.8512 3 12 3C11.1488 3 10.4531 3.60878 9.06165 4.82633Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M12 16H12.009" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+       <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5" >  <a href="{% url 'aboutus' %}">About </a><svg class="filter brightness-0 invert block lg:hidden ml-8 sm:ml-[170px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M20.774 18C21.5233 18 22.1193 17.5285 22.6545 16.8691C23.7499 15.5194 21.9513 14.4408 21.2654 13.9126C20.568 13.3756 19.7894 13.0714 19 13M18 11C19.3807 11 20.5 9.88071 20.5 8.5C20.5 7.11929 19.3807 6 18 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M3.22596 18C2.47666 18 1.88067 17.5285 1.34555 16.8691C0.250089 15.5194 2.04867 14.4408 2.73465 13.9126C3.43197 13.3756 4.21058 13.0714 5 13M5.5 11C4.11929 11 3 9.88071 3 8.5C3 7.11929 4.11929 6 5.5 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M8.0838 15.1112C7.06203 15.743 4.38299 17.0331 6.0147 18.6474C6.81178 19.436 7.69952 20 8.81563 20H15.1844C16.3005 20 17.1882 19.436 17.9853 18.6474C19.617 17.0331 16.938 15.743 15.9162 15.1112C13.5201 13.6296 10.4799 13.6296 8.0838 15.1112Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.5 7.5C15.5 9.433 13.933 11 12 11C10.067 11 8.5 9.433 8.5 7.5C8.5 5.567 10.067 4 12 4C13.933 4 15.5 5.567 15.5 7.5Z" stroke="currentColor" stroke-width="1.5" />
+            </svg></li> 
+              <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5"><a href="{% url 'menu' %}"> Menu </a> <svg class="filter brightness-0 invert block lg:hidden ml-9 sm:ml-[173px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M14.9805 7.01562C14.9805 7.01562 15.4805 7.51562 15.9805 8.51562C15.9805 8.51562 17.5687 6.01562 18.9805 5.51562" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M9.99485 2.02141C7.49638 1.91562 5.56612 2.20344 5.56612 2.20344C4.34727 2.29059 2.01146 2.97391 2.01148 6.9646C2.0115 10.9214 1.98564 15.7993 2.01148 17.744C2.01148 18.932 2.7471 21.7034 5.29326 21.8519C8.3881 22.0324 13.9627 22.0708 16.5205 21.8519C17.2051 21.8133 19.4846 21.2758 19.7731 18.7957C20.072 16.2264 20.0125 14.4407 20.0125 14.0157" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M21.9999 7.01562C21.9999 9.77705 19.7591 12.0156 16.995 12.0156C14.231 12.0156 11.9902 9.77705 11.9902 7.01562C11.9902 4.2542 14.231 2.01562 16.995 2.01562C19.7591 2.01562 21.9999 4.2542 21.9999 7.01562Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M6.98047 13.0156H10.9805" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M6.98047 17.0156H14.9805" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></li>
+              <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5"><a href="{% url 'store' %}"> Store </a> <svg class="filter brightness-0 invert block lg:hidden ml-10 sm:ml-[176px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M2.9668 10.4956V15.4974C2.9668 18.3268 2.9668 19.7415 3.84548 20.6205C4.72416 21.4996 6.13837 21.4996 8.9668 21.4996H14.9668C17.7952 21.4996 19.2094 21.4996 20.0881 20.6205C20.9668 19.7415 20.9668 18.3268 20.9668 15.4974V10.4956" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M6.9668 17.9932H10.9668" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M10.1038 8.41799C9.82182 9.43639 8.79628 11.1931 6.84777 11.4477C5.12733 11.6725 3.82246 10.9216 3.48916 10.6076C3.12168 10.353 2.28416 9.53823 2.07906 9.02903C1.87395 8.51983 2.11324 7.41657 2.28416 6.96678L2.96743 4.98839C3.13423 4.49147 3.5247 3.31617 3.92501 2.91864C4.32533 2.52111 5.13581 2.50381 5.4694 2.50381H12.4749C14.2781 2.52929 18.2209 2.48774 19.0003 2.50382C19.7797 2.5199 20.2481 3.17324 20.3848 3.4533C21.5477 6.27012 22 7.88334 22 8.57075C21.8482 9.30407 21.22 10.6868 19.0003 11.295C16.6933 11.9271 15.3854 10.6976 14.9751 10.2257M9.15522 10.2257C9.47997 10.6245 10.4987 11.4274 11.9754 11.4477C13.4522 11.4681 14.7273 10.4378 15.1802 9.92013C15.3084 9.76737 15.5853 9.31419 15.8725 8.41799" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+              <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5"><a href="{% url 'career' %}"> Career </a> <svg class="filter brightness-0 invert block lg:hidden ml-6 sm:ml-[161px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M22 12.0889V9.23578C22 7.29177 22 6.31978 21.4142 5.71584C20.8284 5.11192 19.8856 5.11192 18 5.11192H15.9214C15.004 5.11192 14.9964 5.11013 14.1715 4.69638L10.8399 3.0254C9.44884 2.32773 8.75332 1.97889 8.01238 2.00314C7.27143 2.02738 6.59877 2.42098 5.25345 3.20819L4.02558 3.92667C3.03739 4.5049 2.54329 4.79402 2.27164 5.27499C2 5.75596 2 6.34169 2 7.51313V15.7487C2 17.2879 2 18.0575 2.34226 18.4859C2.57001 18.7708 2.88916 18.9625 3.242 19.026C3.77226 19.1214 4.42148 18.7416 5.71987 17.9817C6.60156 17.4659 7.45011 16.9301 8.50487 17.0754C9.38869 17.1971 10.21 17.756 11 18.1522" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M8 2.00195V17.0359" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" />
+                <path d="M15 5.00879V11.0224" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M20.1069 20.1754L21.9521 21.9984M21.1691 17.6381C21.1691 19.6048 19.5752 21.1991 17.609 21.1991C15.6428 21.1991 14.0488 19.6048 14.0488 17.6381C14.0488 15.6714 15.6428 14.0771 17.609 14.0771C19.5752 14.0771 21.1691 15.6714 21.1691 17.6381Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+            </svg></li>
+              <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5 "><a href="{% url 'help' %}"> Help </a> <svg class="filter brightness-0 invert block lg:hidden ml-12 sm:ml-[183px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M2.5 12C2.5 7.52166 2.5 5.28249 3.89124 3.89124C5.28249 2.5 7.52166 2.5 12 2.5C16.4783 2.5 18.7175 2.5 20.1088 3.89124C21.5 5.28249 21.5 7.52166 21.5 12C21.5 16.4783 21.5 18.7175 20.1088 20.1088C18.7175 21.5 16.4783 21.5 12 21.5C7.52166 21.5 5.28249 21.5 3.89124 20.1088C2.5 18.7175 2.5 16.4783 2.5 12Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M10 9C10 7.89543 10.8954 7 12 7C13.1046 7 14 7.89543 14 9C14 9.39815 13.8837 9.76913 13.6831 10.0808C13.0854 11.0097 12 11.8954 12 13V13.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                <path d="M11.992 17H12.001" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+              <li class="transition duration-3000 ease-in-out   hover:scale-105 hover:text-yellow-500 ml-6 lg:ml-0 lg:my-2 cursor-pointer my-4 flex gap-5"><a href="{% url 'contact' %}"> Contact </a> <svg class="filter brightness-0 invert block lg:hidden ml-6 sm:ml-[160px]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                <path d="M4.5 10C4.5 6.22876 4.5 4.34315 5.67157 3.17157C6.84315 2 8.72876 2 12.5 2H14C17.7712 2 19.6569 2 20.8284 3.17157C22 4.34315 22 6.22876 22 10V14C22 17.7712 22 19.6569 20.8284 20.8284C19.6569 22 17.7712 22 14 22H12.5C8.72876 22 6.84315 22 5.67157 20.8284C4.5 19.6569 4.5 17.7712 4.5 14V10Z" stroke="currentColor" stroke-width="1.5" />
+                <path d="M4.5 6H2M4.5 12H2M4.5 18H2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M15.2748 8.49261C15.2748 9.59715 14.3794 10.4926 13.2749 10.4926C12.1704 10.4926 11.275 9.59715 11.275 8.49261C11.275 7.38808 12.1704 6.49268 13.2749 6.49268C14.3794 6.49268 15.2748 7.38808 15.2748 8.49261Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                <path d="M9.31982 15.7161C10.3782 14.0868 12.0589 13.4762 13.2749 13.4774C14.491 13.4787 16.1224 14.0868 17.1807 15.7161C17.2492 15.8215 17.268 15.9512 17.2063 16.0607C16.9588 16.4996 16.1903 17.3705 15.6352 17.4296C14.9975 17.4974 13.3291 17.5069 13.2762 17.5072C13.2232 17.5069 11.5034 17.4974 10.8653 17.4296C10.3103 17.3705 9.5418 16.4996 9.29429 16.0607C9.23254 15.9512 9.25139 15.8215 9.31982 15.7161Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+            </svg></li>
+            {% if request.user.is_authenticated %}
+            {% comment %} <p>{{ request.user.username }}</p> {% endcomment %}
+              <li class="flex items-center gap-2 cursor-pointer">
+                <form action="{% url 'logout' %}" method="post">
+                  {% csrf_token %}
+                  <button  class="flex  bg-yellow-500 text-white ml-4 lg:ml-0 sm:ml-28  gap-1 px-4 py-2 lg:py-2 p-2 cursor-pointer font-semibold tracking-widest rounded-md hover:bg-yellow-400 duration-300 hover:gap-2 hover:translate-x-3">
+                      Logout
+                      <img class="pr-2 filter brightness-0 invert" src="/static/images/login.svg" alt="">
+                  </button>
+                  
+                </form>
+                {% else %}
+                <form action="{% url 'signup' %}" method="post">
+                  {% csrf_token %}
+                  <button  class="flex whitespace-nowrap my-3  bg-yellow-500 text-white  ml-4 lg:ml-0 sm:ml-28   gap-1 px-4 py-2 lg:py-2 p-2 cursor-pointer font-semibold tracking-widest rounded-md hover:bg-yellow-400 duration-300 hover:gap-2 hover:translate-x-3">
+                      <p class="">SIGN UP</p>
+                      <img class="pr-2 filter brightness-0 invert " src="/static/images/login.svg" alt="">
+                  </button>
+                </form>
+              </li>
+              {% endif %}
+
+              <li class="cursor-pointer lg:hidden block">
+                  <img name="close" class="close-bar filter brightness-0 invert absolute top-[5%] right-5 sm:right-10" src="/static/images/close.svg" alt="">
+              </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+ <h1 class="contact text-5xl flex justify-center items-center  text-white my-32 transition hover:text-yellow-500  duration-3000 ease-in-out cursor-pointer  hover:scale-105 ">Story</h1>
+</div>
+
+
+
+
+
+
+
+
+
+<div class="Ourstory-con my-20 p-10">
+    <div class="story flex justify-around lg:flex-row flex-col">
+    <div class="story1  ">
+    <h1 class="contact text-5xl flex my-4 justify-center lg:justify-start text-yellow-500  transition hover:text-yellow-500  duration-3000 ease-in-out cursor-pointer  hover:scale-105">Our Mission</h1>
+<h1 class="text-gray-500 text-wrap   ">At Restauranto, our mission is to elevate the art of dining by providing an <br>extraordinary culinary journey that celebrates the vibrant flavors of Sahiwal <br> and beyond.
+    We are dedicated to curating an immersive experience where <br> every dish tells a story, every ingredient is thoughtfully sourced, and every <br> guest  feels like a cherished part of our culinary family.
+    Our commitment to <br> excellence extends from the kitchen to the dining room, where warm <br> hospitality and personalized service create a welcoming atmosphere for all <br> who dine with us.
+    As ambassadors of Sahiwal's culinary heritage, we embrace <br> innovation while honoring tradition, continuously striving to push the <br> boundaries of flavor and presentation.
+    Our vision is not only to satisfy hunger <br> but also to ignite passion, spark conversation, and foster connections that <br> transcend  the plate.
+    With a steadfast focus on quality, creativity, and community, <br> Restauranto seeks to be more than just a restaurant—it aims to be a cultural hub, <br> a culinary destination, and a source of inspiration for all who seek memorable <br> dining experiences.
+</h1>
+    </div>
+    <div class="story2 flex justify-center items-center my-16">
+        <img src="/static/images/story2.webp" alt="">
+    </div>
+</div>
+<div class="mission mt-20 flex flex-col">
+    <div class="m1 flex justify-center items-center flex-col">
+        <h1 class="contact text-5xl flex my-4  text-yellow-500  transition hover:text-yellow-500  duration-3000 ease-in-out cursor-pointer  hover:scale-105">Our Story</h1>
+        <section class="text-gray-600 body-font">
+          <div class="container px-5  mx-auto">
+            <div class="xl:w-1/2 lg:w-3/4 w-full mx-auto text-center">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="currentColor" class="inline-block w-8 h-8 text-gray-400 mb-8" viewBox="0 0 975.036 975.036">
+                <path d="M925.036 57.197h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.399 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l36 76c11.6 24.399 40.3 35.1 65.1 24.399 66.2-28.6 122.101-64.8 167.7-108.8 55.601-53.7 93.7-114.3 114.3-181.9 20.601-67.6 30.9-159.8 30.9-276.8v-239c0-27.599-22.401-50-50-50zM106.036 913.497c65.4-28.5 121-64.699 166.9-108.6 56.1-53.7 94.4-114.1 115-181.2 20.6-67.1 30.899-159.6 30.899-277.5v-239c0-27.6-22.399-50-50-50h-304c-27.6 0-50 22.4-50 50v304c0 27.601 22.4 50 50 50h145.5c-1.9 79.601-20.4 143.3-55.4 191.2-27.6 37.8-69.4 69.1-125.3 93.8-25.7 11.3-36.8 41.7-24.8 67.101l35.9 75.8c11.601 24.399 40.501 35.2 65.301 24.399z"></path>
+              </svg>
+              <h1 class="text-gray-500 lg:px-20">Today, many of diners place their trust in Restauranto to provide them with food of the highest standard, quick service, and unbeatable value. So, the next time you step into one of our restaurants, remember that Restauranto is here to bring a smile to your face, every single time you dine with us.
+
+                Restauranto is deeply committed to giving back to the communities where we operate. We believe in the importance of organizations playing an active role in supporting successful communities. Our greatest joy comes from collaborating with others in the community to bring about meaningful benefits for those who need it most.</h1>              <span class="inline-block h-1 w-10 rounded bg-indigo-500 mt-8 mb-6"></span>
+              <h2 class="text-gray-900 font-medium title-font tracking-wider text-sm">Muhammad Saad Nadeem</h2>
+              <p class="text-gray-500">Senior Manager</p>
+            </div>
+          </div>
+        </section>
+    </div>
+    {% comment %} <div class="mission2 flex justify-center items-center my-16 ">
+        <img src="/static/images/story1.avif" alt="">
+    </div> {% endcomment %}
+</div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+<div class="container8 py-10 px-20 pb-0 ">
+    <div class="half8-logo flex flex-col items-start justify-start">
+      <img class="px-0 my-5 w-64 h-10 sm:w-80" src="/static/images/logo.png" alt="">
+    </div>
+    <div class="full-con8 flex flex-col gap-10 ">
+      
+      <div class="half8-1 flex lg:flex-nowrap sm:flex-row sm:flex-wrap flex-col  gap-12  sm:gap-32 justify-center items-center sm:items-baseline">
+        <div class="half8-1-1 text-white list-none">
+          <h1 class="my-2 text-2xl transition duration-3000 ease-in-out   hover:scale-105 text-yellow-500 font-bold">COMPANY</h1>
+          <li class="my-3"><a href="">About Us</a></li>
+          <li class="my-3"><a href="">Contact Us</a></li>
+          <li class="my-3"><a href="">Reservation</a></li>
+          <li class="my-3"><a href="">Terms & Conditions</a></li>
+          <li class="my-3"><a href="">Privacy Policy</a></li>
+        </div>
+        <div class="half8-1-2 text-white list-none">
+            <h1 class="my-2 text-2xl transition duration-3000 ease-in-out   hover:scale-105 text-yellow-500 font-bold">For Business Partners</h1>
+            <li class="my-3"><a href="">Corporate</a></li>
+            <li class="my-3"><a href="">Landlord Support Center Us</a></li>
+            <li class="my-3"><a href=""> Suppliers</a></li>
+            <li class="my-3"><a href=""> Corporate Gift Card Sales</a></li>
+            <li class="my-3"><a href="">Office and Foodservice</a></li>
+          </div>
+        <div class="half8-1-3 text-white list-none">
+          <h1 class="my-2 text-2xl transition duration-3000 ease-in-out   hover:scale-105 text-yellow-500 font-bold">CAREERS</h1>
+          <li class="my-3"><a href="">Culture and Values</a></li>
+          <li class="my-3"><a href="">Employee Testimonials</a></li>
+          <li class="my-3"><a href="">Career Development</a></li>
+          <li class="my-3"><a href="">Benefits and Perks</a></li>
+          <li class="my-3"><a href="">Job Openings</a></li>
+        </div>
+        <div class="half8-1-4 text-white list-none">
+          <h1 class="my-2 text-2xl transition duration-3000 ease-in-out   hover:scale-105 text-yellow-500 font-bold">OPENING</h1>
+          <li class="my-3"><a href="">Monday - Saturday
+            09AM - 09PM</a></li>
+          <li class="my-3"><a href="">Sunday
+            10AM - 08PM</a></li>
+        
+        </div>
+      </div>
+      <div class="half8-2 flex sm:flex-row sm:justify-between flex-col items-center justify-center ">
+        <div class="half8-2-1 flex flex-col ">
+          <div class="social-buttons">
+            <a href="#" class="social-button github">
+              <svg class="cf-icon-svg" xmlns="http://www.w3.org/2000/svg" viewBox="-2.5 0 19 19"><path d="M9.464 17.178a4.506 4.506 0 0 1-2.013.317 4.29 4.29 0 0 1-2.007-.317.746.746 0 0 1-.277-.587c0-.22-.008-.798-.012-1.567-2.564.557-3.105-1.236-3.105-1.236a2.44 2.44 0 0 0-1.024-1.348c-.836-.572.063-.56.063-.56a1.937 1.937 0 0 1 1.412.95 1.962 1.962 0 0 0 2.682.765 1.971 1.971 0 0 1 .586-1.233c-2.046-.232-4.198-1.023-4.198-4.554a3.566 3.566 0 0 1 .948-2.474 3.313 3.313 0 0 1 .091-2.438s.773-.248 2.534.945a8.727 8.727 0 0 1 4.615 0c1.76-1.193 2.532-.945 2.532-.945a3.31 3.31 0 0 1 .092 2.438 3.562 3.562 0 0 1 .947 2.474c0 3.54-2.155 4.32-4.208 4.548a2.195 2.195 0 0 1 .625 1.706c0 1.232-.011 2.227-.011 2.529a.694.694 0 0 1-.272.587z"></path></svg>
+                </a>
+                <a href="#" class="social-button linkedin">
+                  <svg viewBox="0 -2 44 44" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <g id="Icons" stroke="none" stroke-width="1">
+                      <g transform="translate(-702.000000, -265.000000)">
+                          <path d="M746,305 L736.2754,305 L736.2754,290.9384 C736.2754,287.257796 734.754233,284.74515 731.409219,284.74515 C728.850659,284.74515 727.427799,286.440738 726.765522,288.074854 C726.517168,288.661395 726.555974,289.478453 726.555974,290.295511 L726.555974,305 L716.921919,305 C716.921919,305 717.046096,280.091247 716.921919,277.827047 L726.555974,277.827047 L726.555974,282.091631 C727.125118,280.226996 730.203669,277.565794 735.116416,277.565794 C741.21143,277.565794 746,281.474355 746,289.890824 L746,305 L746,305 Z M707.17921,274.428187 L707.117121,274.428187 C704.0127,274.428187 702,272.350964 702,269.717936 C702,267.033681 704.072201,265 707.238711,265 C710.402634,265 712.348071,267.028559 712.41016,269.710252 C712.41016,272.34328 710.402634,274.428187 707.17921,274.428187 L707.17921,274.428187 L707.17921,274.428187 Z M703.109831,277.827047 L711.685795,277.827047 L711.685795,305 L703.109831,305 L703.109831,277.827047 L703.109831,277.827047 Z" id="LinkedIn">
+              </path>
+                      </g>
+                  </g>
+              </svg>
+            </a>
+            <a href="#" class="social-button facebook">
+              <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 310 310" xml:space="preserve">
+          <g id="XMLID_834_">
+            <path id="XMLID_835_" d="M81.703,165.106h33.981V305c0,2.762,2.238,5,5,5h57.616c2.762,0,5-2.238,5-5V165.765h39.064
+              c2.54,0,4.677-1.906,4.967-4.429l5.933-51.502c0.163-1.417-0.286-2.836-1.234-3.899c-0.949-1.064-2.307-1.673-3.732-1.673h-44.996
+              V71.978c0-9.732,5.24-14.667,15.576-14.667c1.473,0,29.42,0,29.42,0c2.762,0,5-2.239,5-5V5.037c0-2.762-2.238-5-5-5h-40.545
+              C187.467,0.023,186.832,0,185.896,0c-7.035,0-31.488,1.381-50.804,19.151c-21.402,19.692-18.427,43.27-17.716,47.358v37.752H81.703
+              c-2.762,0-5,2.238-5,5v50.844C76.703,162.867,78.941,165.106,81.703,165.106z"></path>
+          </g>
+          </svg>
+            </a>
+            <a href="#" class="social-button instagram">
+              <svg width="800px" height="800px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+              <g id="Page-1" stroke="none" stroke-width="1">
+                  <g id="Dribbble-Light-Preview" transform="translate(-340.000000, -7439.000000)">
+                      <g id="icons" transform="translate(56.000000, 160.000000)">
+                          <path d="M289.869652,7279.12273 C288.241769,7279.19618 286.830805,7279.5942 285.691486,7280.72871 C284.548187,7281.86918 284.155147,7283.28558 284.081514,7284.89653 C284.035742,7285.90201 283.768077,7293.49818 284.544207,7295.49028 C285.067597,7296.83422 286.098457,7297.86749 287.454694,7298.39256 C288.087538,7298.63872 288.809936,7298.80547 289.869652,7298.85411 C298.730467,7299.25511 302.015089,7299.03674 303.400182,7295.49028 C303.645956,7294.859 303.815113,7294.1374 303.86188,7293.08031 C304.26686,7284.19677 303.796207,7282.27117 302.251908,7280.72871 C301.027016,7279.50685 299.5862,7278.67508 289.869652,7279.12273 M289.951245,7297.06748 C288.981083,7297.0238 288.454707,7296.86201 288.103459,7296.72603 C287.219865,7296.3826 286.556174,7295.72155 286.214876,7294.84312 C285.623823,7293.32944 285.819846,7286.14023 285.872583,7284.97693 C285.924325,7283.83745 286.155174,7282.79624 286.959165,7281.99226 C287.954203,7280.99968 289.239792,7280.51332 297.993144,7280.90837 C299.135448,7280.95998 300.179243,7281.19026 300.985224,7281.99226 C301.980262,7282.98483 302.473801,7284.28014 302.071806,7292.99991 C302.028024,7293.96767 301.865833,7294.49274 301.729513,7294.84312 C300.829003,7297.15085 298.757333,7297.47145 289.951245,7297.06748 M298.089663,7283.68956 C298.089663,7284.34665 298.623998,7284.88065 299.283709,7284.88065 C299.943419,7284.88065 300.47875,7284.34665 300.47875,7283.68956 C300.47875,7283.03248 299.943419,7282.49847 299.283709,7282.49847 C298.623998,7282.49847 298.089663,7283.03248 298.089663,7283.68956 M288.862673,7288.98792 C288.862673,7291.80286 291.150266,7294.08479 293.972194,7294.08479 C296.794123,7294.08479 299.081716,7291.80286 299.081716,7288.98792 C299.081716,7286.17298 296.794123,7283.89205 293.972194,7283.89205 C291.150266,7283.89205 288.862673,7286.17298 288.862673,7288.98792 M290.655732,7288.98792 C290.655732,7287.16159 292.140329,7285.67967 293.972194,7285.67967 C295.80406,7285.67967 297.288657,7287.16159 297.288657,7288.98792 C297.288657,7290.81525 295.80406,7292.29716 293.972194,7292.29716 C292.140329,7292.29716 290.655732,7290.81525 290.655732,7288.98792" id="instagram-[#167]">
+          
+          </path>
+                      </g>
+                  </g>
+              </g>
+          </svg>
+            </a>
+          </div>
+        </div>
+        <div class="half8-2-2 flex my-4">
+          <a href=""><img class="h-10" src="/static/images/a-store8.png" alt=""></a>
+          <a href=""><img class="h-10" src="/static/images/google8.png" alt=""></a>
+        </div>
+      </div>
+    </div>
+    <div class="partition-line my-3 border-solid border-black h-[1px] w-full bg-gray-500 "></div>
+    <div class="hal8-3 text-xs text-white list-none flex md:justify-between md:flex-row  flex-col items-center md:items-baseline  justify-center">
+      <div class="half8-3-1 flex gap-4 my-4 ">
+        <li><a href="">Privacy Notice</a></li>
+        <li><a href="">Terms of Use</a></li>
+        <li><a href="">Do Not Share My Personal Information
+        </a></li>
+        <li><a href="">Accessibility</a></li>
+        <li><a href="">Cookie Preferences</a></li>
+      </div>
+      <div class="half8-3-2 my-4">
+        &copy;2024 RESTAURANTO's. All Rights Reserved.
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
+  <script src="/static/script1.js"></script>
+
+
+</body>
+</html> 
+
+
+{% comment %} {% endblock content %} {% endcomment %}
+
+
+{% comment %} {% include "footer.html" %} {% endcomment %}
+
+
+
+
+
+

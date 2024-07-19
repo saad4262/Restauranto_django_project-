@@ -1,0 +1,426 @@
+
+
+{% extends "base.html" %}
+ 
+{% block head %} 
+
+{% comment %} 
+{% block about %}
+
+
+{% endblock about %}
+ {% endcomment %}
+
+
+{% comment %} 
+{% if request.user.is_authenticated %}
+  <p>{{ request.user.username }}</p>
+  <a href="{% url 'logout' %}">Logout</a>
+{% else %}
+  <a href="{% url 'login' %}">Login</a>
+  <a href="{% url 'signup' %}">Signup</a>
+{% endif %} {% endcomment %}
+{% comment %} 
+<h1>Welcome!</h1> {% endcomment %}
+
+
+{% comment %} {% block about %}  {% endcomment %}
+
+   
+<div class="container2 pr-2 py-10 sm:p-20 bg-gray-200 lg:flex-row flex-col gap-4 justify-center items-center flex-wrap xl:flex-nowrap">
+    <h1 class="text-5xl my-5 font-bold text-yellow-500 flex justify-center items-center transition duration-3000 ease-in-out hover:scale-105">ABOUT US</h1>
+    <div class="full-con2 flex lg:flex-row flex-col gap-4 justify-center items-center flex-wrap xl:flex-nowrap">
+        {% for menu1 in about_us_data %}
+        <article class="card sm:w-[20rem] w-72 rounded-xl">
+            <div class="temporary_text">
+                {% if menu1.image %}
+                <img src="{{ menu1.image.url }}" alt="{{ menu1.title }}">
+                {% else %}
+                <p>No image available</p>
+                {% endif %}
+            </div>
+            <div class="card_content">
+                <span class="card_title transition duration-3000 ease-in-out hover:scale-105 hover:text-yellow-500 cursor-pointer">{{ menu1.title }}</span>
+                <span class="card_subtitle">{{ menu1.subtitle }}</span>
+                <p class="card_description text-gray-500">{{ menu1.description }}<br> 
+                  {% if menu1.title == 'Our Story' %}
+                  <a class="text-blue-600" href="{% url 'story'  %}">Read more</a>
+                  {% elif menu1.title == 'Master Chefs' %}
+                  <a class="text-blue-600" href="{% url 'chefs'  %}">Read more</a>
+                  {% elif menu1.title == 'Special Deals' %}
+                  <a class="text-blue-600" href="{% url 'deals'  %}">Read more</a>
+                  {% elif menu1.title == 'Online Order' %}
+                  <a class="text-blue-600" href="{% url 'menu'  %}">Read more</a>
+                  {% endif %}
+                </p>
+            </div>
+        </article>
+        {% endfor %}
+    </div>
+</div>
+
+
+
+      
+
+    <div class="container3">
+        <section class="text-white body-font">
+            <div class="container px-5 py-24 mx-auto flex flex-wrap">
+              <div class="flex flex-wrap -mx-4 mt-auto mb-auto lg:w-1/2 sm:w-2/3 content-start sm:pr-10">
+                <div class="w-full sm:p-4 px-4 mb-6">
+                  <h1 class="text-yellow-500   text-4xl font-bold  mb-2 transition duration-3000 ease-in-out   hover:scale-105 cursor-pointer">
+                    Welcome To <img class="inline w-72 " src="static/images/logo.png" alt="">
+                  </h1>
+                  <div class="leading-relaxed">Pour-over craft beer pug drinking vinegar live-edge gastropub, keytar neutra sustainable fingerstache kickstarter.</div>
+                </div>
+                <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 cursor-pointer ">
+                  <h2 class="title-font font-medium text-3xl text-white num" data-val="101">0</h2>
+                  <p class="leading-relaxed ">Users</p>
+                </div>
+                <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 cursor-pointer">
+                  <h2 class="title-font font-medium text-3xl text-white num" data-val="88">0</h2>
+                  <p class="leading-relaxed ">Subscribes</p>
+                </div>
+                <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 cursor-pointer">
+                  <h2 class="title-font font-medium text-3xl text-white num" data-val="55">0</h2>
+                  <p class="leading-relaxed ">Downloads</p>
+                </div>
+                <div class="p-4 sm:w-1/2 lg:w-1/4 w-1/2 cursor-pointer">
+                  <h2 class="title-font font-medium text-3xl text-white num" data-val="16">0</h2>
+                  <p class="leading-relaxed ">Products</p>
+                </div>
+              </div>
+              <div class="lg:w-1/2 sm:w-1/3 w-full rounded-lg overflow-hidden mt-6 sm:mt-0">
+                <section class="text-gray-600 body-font">
+                    <div class="container px-5 py-24 mx-auto flex flex-wrap">
+                    
+                      <div class="con3-images flex flex-wrap md:-m-2 -m-1">
+                        <div class="flex flex-wrap w-1/2">
+                          <div class="md:p-2 p-1 w-1/2">
+                            <img alt="gallery" class="w-full object-cover h-full object-center block" src="static/images/con3-1.jpg">
+                          </div>
+                          <div class="md:p-2 p-1 w-1/2">
+                            <img alt="gallery" class="w-full object-cover h-full object-center block" src="static/images/con3-3.webp">
+                          </div>
+                          <div class="md:p-2 p-1 w-full">
+                            <img alt="gallery" class="w-full h-full object-cover object-center block" src="static/images/con3-2.jpg">
+                          </div>
+                        </div>
+                        <div class="flex flex-wrap w-1/2">
+                          <div class="md:p-2 p-1 w-full">
+                            <img alt="gallery" class="w-full h-full object-cover object-center block" src="static/images/con3-1.avif">
+                          </div>
+                          <div class="md:p-2 p-1 w-1/2">
+                            <img alt="gallery" class="w-full object-cover h-full object-center block" src="static/images/con3-4.webp">
+                          </div>
+                          <div class="md:p-2 p-1 w-1/2">
+                            <img alt="gallery" class="w-full object-cover h-full object-center block" src="static/images/con3-5.jpg">
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </section>
+              </div>
+            </div>
+          </section>
+          
+    </div> 
+
+
+    
+
+ 
+<div class="container4 pr-2 py-10 pl-5 flex flex-col gap-4 flex-wrap bg-gray-200 justify-center items-center">
+      
+    <h1 class="text-5xl font-bold text-yellow-500 flex flex-col justify-center items-center transition duration-3000 ease-in-out   hover:scale-105">Menu</h1>
+
+    <div class="partition-line my-3 border-solid border-black h-[1px] w-1/2 bg-gray-500 "></div>
+
+    <div class="flex gap-4  flex-wrap justify-center items-center">
+ 
+        {% for menu in Menudata %}
+
+    <div class="card h-96">
+        {% if menu.image %}
+      <img
+        class="card__background"
+        src="{{ menu.image.url }}"
+        alt="Photo of Cartagena's cathedral at the background and some colonial style houses"
+        width="1920"
+        height="2193"
+      />
+      {% else %}
+      <p>No image available</p>
+        {% endif %}
+      <div class="card__content | flow">
+        <div class="card__content--container | flow">
+          <h2 class="card__title">{{menu.title}}</h2>
+          <p class="card__description">
+            {{menu.description}}
+          </p>
+        </div>
+        {% if menu.title == 'Fast Food' %}
+        <button class="card__button"><a href="/MenuItems?category=FastFood">Order</a></button>
+        {% elif menu.title == 'Desi Food' %}
+
+        <button class="card__button"><a href="/MenuItems?category=PakistaniCuisine">Order</a></button>
+        {% elif menu.title == 'Continental Food' %}
+
+        <button class="card__button"><a href="/MenuItems?category=Continental">Order</a></button>
+        {% elif menu.title == 'Desserts' %}
+
+        <button class="card__button"><a href="/MenuItems?category=Desserts">Order</a></button>
+        {% endif %}
+
+      
+
+      </div>
+    </div>
+    {% endfor %}
+  </div>
+
+  <div class="partition-line my-3 border-solid border-black h-[1px] w-1/2 bg-gray-500 "></div>
+
+
+    
+  </div>
+
+
+
+    {% include "reservation.html" %}
+
+
+   
+<div class="container6 p-16 flex gap-10 justify-center items-center flex-wrap bg-gray-200">
+  <h1 class="text-5xl my-3 font-bold text-yellow-500 flex flex-col justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">OUR Master Chefs</h1>
+  
+  
+  <div class="full-con6 flex gap-4  flex-wrap justify-center items-center">
+      {% for n in ChefModels %}
+
+  <div class="card6">
+    <div class="card-photo6">
+      {% if n.image %}
+
+      {% comment %} <img class="rounded-full" src="static/images/saad.jpg" alt=""> {% endcomment %}
+      
+      <img class="rounded-full"  src="{{ n.image.url }}" alt="{{ n.title }}">
+      {% else %}
+    <p>No image available</p>
+      {% endif %}
+    </div>
+    <div class="card-title6 font-bold hover:text-yellow-500 cursor-pointer">{{n.name}}<br>
+        <span class="font-normal">{{n.title}}</span>
+    </div>
+    <div class="card-socials6">
+        <button class="card-socials-btn6 facebook6 ">
+           <a class="hover:bg-blue" id="facebook" href=""> <svg class="hover:bg-blue" class="icon" xmlns="http://www.w3.org/2000/svg" width="24" viewBox="0 0 24 24" id="Layer_21" height="24" data-name="Layer 21"><title></title><path d="M16.75,9H13.5V7a1,1,0,0,1,1-1h2V3H14a4,4,0,0,0-4,4V9H8v3h2v9h3.5V12H16Z"></path></svg></a>
+        </button>
+        <button class="card-socials-btn6 twitter6">
+        </svg></a>
+        
+        <a id="twitter" href="#"><svg viewBox="0 0 16 16" class="bi bi-twitter" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"></path>
+    </svg></a>            </button>
+        <button class="card-socials-btn6 instagram6">
+        </svg></a>
+        
+        <a id="instagram" href="#"><svg viewBox="0 0 16 16" class="bi bi-instagram" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+      <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"></path>
+    </svg></a>            </button>
+    </div>
+</div>
+{% endfor %}
+
+
+
+</div>
+</div>
+
+
+
+
+
+
+    <div class="container7 p-20 flex gap-20 overflow-hidden flex-col w-full ">
+      <h1 class="text-5xl my-3 font-bold text-yellow-500 flex  justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Our Clients Say!!!</h1>
+
+
+<div class="full-con7 flex gap-20  justify-center items-center">
+  <div class="card7  h-72 " style="--rating:90">
+    <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r1.jpg" alt=""></div>
+    <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Uzair</div>
+    <p class="description  text-xs relative bottom-14 ">Restauranto impressed us with its friendly staff and delicious menu. The steak was juicy and cooked just right. The only downside was the wait time, but it was worth it for such a great meal.</p>
+    <div class="rating relative bottom-8 left-10" data-rating="4">★★★☆☆</div>
+    
+  </div>
+      
+      <div class="card7  h-72 " style="--rating:90">
+        <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r2.jpg" alt=""></div>
+        <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Zain</div>
+        <p class="description  text-xs relative bottom-14 ">Had a fantastic dinner at Restauranto. The pasta dishes were cooked to perfection, and the flavors were authentic and rich. The cozy atmosphere made it a perfect spot for a romantic dinner.</p>
+        <div class="rating relative bottom-8 left-10" data-rating="4">★★★★☆</div>
+        
+      </div>
+      <div class="card7  h-72 " style="--rating:90">
+        <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r3.jpg" alt=""></div>
+        <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Ali</div>
+        <p class="description  text-xs relative bottom-14 ">Restauranto offers an exceptional dining experience with its delightful ambiance and top-notch service. The seafood platter was fresh and perfectly seasoned, making it a standout dish.</p>
+        <div class="rating relative bottom-8 left-10" data-rating="4">★★☆☆☆</div>
+        
+      </div>
+      <div class="card7  h-72 " style="--rating:90">
+        <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r4.jpg" alt=""></div>
+        <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Nubaid</div>
+        <p class="description  text-xs relative bottom-14 ">Our family had a wonderful evening at Restauranto. The kids loved the pizza, and the tiramisu was a delightful end to the meal. The service was attentive and the atmosphere welcoming.</p>
+        <div class="rating relative bottom-8 left-10" data-rating="4">★★★★★</div>
+      
+      </div>
+      <div class="card7  h-72 " style="--rating:90">
+        <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r5.jpg" alt=""></div>
+        <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Asif</div>
+        <p class="description  text-xs relative bottom-14 ">Enjoyed a lovely brunch at Restauranto. The eggs benedict were superb, and the coffee was strong and flavorful. A great place to start your weekend with friends.</p>
+        <div class="rating relative bottom-8 left-10" data-rating="4">★★★★☆</div>
+        
+      </div>
+
+      <div class="card7  h-72 " style="--rating:90">
+        <div class="icon"><img class="h-20 w-20 relative bottom-16 left-12 rounded-full  bg-centerbg-cover" src="static/images/r6.jpg" alt=""></div>
+        <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">Zohaib</div>
+        <p class="description  text-xs relative bottom-14 ">The menu options are diverse, the execution could be improved. Service was adequate, but nothing exceptional. Overall, an average dining experience.</p>
+        <div class="rating relative bottom-8 left-10" data-rating="4">★★☆☆☆</div>
+        
+      </div>
+    </div>
+
+    </div>
+
+ {% comment %} {% include "signupletter.html" %}  {% endcomment %}
+
+{% comment %} 
+<div class="container9 p-20 bg-gray-200">
+  <div class="full-con9 flex md:flex-row flex-col md:justify-around justify-center items-center ">
+  <div class="half-9-1">
+    <div class="half9-1-1 ">
+      <h1 class="text-5xl">Sign Up For Our Newsletter</h1>
+      <p class="text-gray-700 text-sm my-4">Stay in the loop with everything you need to know</p>
+    </div>
+    
+<div class="half9-1-2 ">
+  <div class="card9">
+    <a class="social-link1">
+      <svg class="filter brightness-0 hover:invert" style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" fill="white">
+        </path>
+      </svg>
+    </a>
+    <a class="social-link2">
+      <svg class="filter brightness-0 hover:invert" viewBox="0 0 496 512" height="1em" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+        </path>
+      </svg> </a>
+    <a class="social-link3">
+      <svg class="filter brightness-0 hover:invert" style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16">
+        <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" fill="white">
+        </path>
+      </svg>
+    </a>
+    <a class="social-link4">
+      <svg class="filter brightness-0 hover:invert" fill="#fff" viewBox="0 0 448 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
+        </path>
+      </svg> </a>
+    <a class="social-link5">
+      <svg class="filter brightness-0 hover:invert" viewBox="0 0 16 16" class="bi bi-stack-overflow" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.412 14.572V10.29h1.428V16H1v-5.71h1.428v4.282h9.984z"></path>
+        <path d="M3.857 13.145h7.137v-1.428H3.857v1.428zM10.254 0 9.108.852l4.26 5.727 1.146-.852L10.254 0zm-3.54 3.377 5.484 4.567.913-1.097L7.627 2.28l-.914 1.097zM4.922 6.55l6.47 3.013.603-1.294-6.47-3.013-.603 1.294zm-.925 3.344 6.985 1.469.294-1.398-6.985-1.468-.294 1.397z"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+  </div>
+  <div class="half9-2">
+    <div class="half9-2-1 flex my-4">
+      <div class="subscribe w-80">
+        <p class="text-gray-700">SUBSCRIBE</p>
+        <input placeholder="Your e-mail" class="subscribe-input" name="email" type="email">
+        <br>
+        <div class="submit-btn transition duration-3000 ease-in-out   hover:scale-105 ">SUBMIT</div>
+      </div>
+    </div> 
+  </div>
+</div>
+</div> {% endcomment %}
+
+
+
+
+
+<div class="container9 p-20 bg-gray-200">
+  <div class="full-con9 flex md:flex-row flex-col md:justify-around justify-center items-center ">
+  <div class="half-9-1">
+    <div class="half9-1-1 ">
+      <h1 class="text-5xl">Sign Up For Our Newsletter</h1>
+      <p class="text-gray-700 text-sm my-4">Stay in the loop with everything you need to know</p>
+    </div>
+    
+<div class="half9-1-2 ">
+  <div class="card9">
+    <a class="social-link1">
+      <svg class="filter brightness-0 hover:invert" style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-instagram" viewBox="0 0 16 16">
+        <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z" fill="white">
+        </path>
+      </svg>
+    </a>
+    <a class="social-link2">
+      <svg class="filter brightness-0 hover:invert" viewBox="0 0 496 512" height="1em" fill="#fff" xmlns="http://www.w3.org/2000/svg">
+        <path d="M165.9 397.4c0 2-2.3 3.6-5.2 3.6-3.3.3-5.6-1.3-5.6-3.6 0-2 2.3-3.6 5.2-3.6 3-.3 5.6 1.3 5.6 3.6zm-31.1-4.5c-.7 2 1.3 4.3 4.3 4.9 2.6 1 5.6 0 6.2-2s-1.3-4.3-4.3-5.2c-2.6-.7-5.5.3-6.2 2.3zm44.2-1.7c-2.9.7-4.9 2.6-4.6 4.9.3 2 2.9 3.3 5.9 2.6 2.9-.7 4.9-2.6 4.6-4.6-.3-1.9-3-3.2-5.9-2.9zM244.8 8C106.1 8 0 113.3 0 252c0 110.9 69.8 205.8 169.5 239.2 12.8 2.3 17.3-5.6 17.3-12.1 0-6.2-.3-40.4-.3-61.4 0 0-70 15-84.7-29.8 0 0-11.4-29.1-27.8-36.6 0 0-22.9-15.7 1.6-15.4 0 0 24.9 2 38.6 25.8 21.9 38.6 58.6 27.5 72.9 20.9 2.3-16 8.8-27.1 16-33.7-55.9-6.2-112.3-14.3-112.3-110.5 0-27.5 7.6-41.3 23.6-58.9-2.6-6.5-11.1-33.3 2.6-67.9 20.9-6.5 69 27 69 27 20-5.6 41.5-8.5 62.8-8.5s42.8 2.9 62.8 8.5c0 0 48.1-33.6 69-27 13.7 34.7 5.2 61.4 2.6 67.9 16 17.7 25.8 31.5 25.8 58.9 0 96.5-58.9 104.2-114.8 110.5 9.2 7.9 17 22.9 17 46.4 0 33.7-.3 75.4-.3 83.6 0 6.5 4.6 14.4 17.3 12.1C428.2 457.8 496 362.9 496 252 496 113.3 383.5 8 244.8 8zM97.2 352.9c-1.3 1-1 3.3.7 5.2 1.6 1.6 3.9 2.3 5.2 1 1.3-1 1-3.3-.7-5.2-1.6-1.6-3.9-2.3-5.2-1zm-10.8-8.1c-.7 1.3.3 2.9 2.3 3.9 1.6 1 3.6.7 4.3-.7.7-1.3-.3-2.9-2.3-3.9-2-.6-3.6-.3-4.3.7zm32.4 35.6c-1.6 1.3-1 4.3 1.3 6.2 2.3 2.3 5.2 2.6 6.5 1 1.3-1.3.7-4.3-1.3-6.2-2.2-2.3-5.2-2.6-6.5-1zm-11.4-14.7c-1.6 1-1.6 3.6 0 5.9 1.6 2.3 4.3 3.3 5.6 2.3 1.6-1.3 1.6-3.9 0-6.2-1.4-2.3-4-3.3-5.6-2z">
+        </path>
+      </svg> </a>
+    <a class="social-link3">
+      <svg class="filter brightness-0 hover:invert" style="color: white" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-discord" viewBox="0 0 16 16">
+        <path d="M13.545 2.907a13.227 13.227 0 0 0-3.257-1.011.05.05 0 0 0-.052.025c-.141.25-.297.577-.406.833a12.19 12.19 0 0 0-3.658 0 8.258 8.258 0 0 0-.412-.833.051.051 0 0 0-.052-.025c-1.125.194-2.22.534-3.257 1.011a.041.041 0 0 0-.021.018C.356 6.024-.213 9.047.066 12.032c.001.014.01.028.021.037a13.276 13.276 0 0 0 3.995 2.02.05.05 0 0 0 .056-.019c.308-.42.582-.863.818-1.329a.05.05 0 0 0-.01-.059.051.051 0 0 0-.018-.011 8.875 8.875 0 0 1-1.248-.595.05.05 0 0 1-.02-.066.051.051 0 0 1 .015-.019c.084-.063.168-.129.248-.195a.05.05 0 0 1 .051-.007c2.619 1.196 5.454 1.196 8.041 0a.052.052 0 0 1 .053.007c.08.066.164.132.248.195a.051.051 0 0 1-.004.085 8.254 8.254 0 0 1-1.249.594.05.05 0 0 0-.03.03.052.052 0 0 0 .003.041c.24.465.515.909.817 1.329a.05.05 0 0 0 .056.019 13.235 13.235 0 0 0 4.001-2.02.049.049 0 0 0 .021-.037c.334-3.451-.559-6.449-2.366-9.106a.034.034 0 0 0-.02-.019Zm-8.198 7.307c-.789 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.45.73 1.438 1.613 0 .888-.637 1.612-1.438 1.612Zm5.316 0c-.788 0-1.438-.724-1.438-1.612 0-.889.637-1.613 1.438-1.613.807 0 1.451.73 1.438 1.613 0 .888-.631 1.612-1.438 1.612Z" fill="white">
+        </path>
+      </svg>
+    </a>
+    <a class="social-link4">
+      <svg class="filter brightness-0 hover:invert" fill="#fff" viewBox="0 0 448 512" height="1em" xmlns="http://www.w3.org/2000/svg">
+        <path d="M100.28 448H7.4V148.9h92.88zM53.79 108.1C24.09 108.1 0 83.5 0 53.8a53.79 53.79 0 0 1 107.58 0c0 29.7-24.1 54.3-53.79 54.3zM447.9 448h-92.68V302.4c0-34.7-.7-79.2-48.29-79.2-48.29 0-55.69 37.7-55.69 76.7V448h-92.78V148.9h89.08v40.8h1.3c12.4-23.5 42.69-48.3 87.88-48.3 94 0 111.28 61.9 111.28 142.3V448z">
+        </path>
+      </svg> </a>
+    <a class="social-link5">
+      <svg class="filter brightness-0 hover:invert" viewBox="0 0 16 16" class="bi bi-stack-overflow" fill="currentColor" height="16" width="16" xmlns="http://www.w3.org/2000/svg">
+        <path d="M12.412 14.572V10.29h1.428V16H1v-5.71h1.428v4.282h9.984z"></path>
+        <path d="M3.857 13.145h7.137v-1.428H3.857v1.428zM10.254 0 9.108.852l4.26 5.727 1.146-.852L10.254 0zm-3.54 3.377 5.484 4.567.913-1.097L7.627 2.28l-.914 1.097zM4.922 6.55l6.47 3.013.603-1.294-6.47-3.013-.603 1.294zm-.925 3.344 6.985 1.469.294-1.398-6.985-1.468-.294 1.397z"></path>
+      </svg>
+    </a>
+  </div>
+</div>
+
+</div>
+<form  method="POST">
+<div class="half9-2">
+<div class="half9-2-1 flex my-4">
+  <div class="subscribe w-80">
+    <p class="text-gray-700">SUBSCRIBE</p>
+          {% csrf_token %}
+          {{ form1.recipient }}
+
+        {% comment %} <input placeholder="Your e-mail" class="subscribe-input" name="recipient" type="email"> {% endcomment %}
+        <br>
+        <button><div class="submit submit-btn transition duration-3000 ease-in-out   hover:scale-105 ">SUBMIT</div></button>
+      </div>
+    </div> 
+  </div>
+</form>
+</div>
+</div>
+
+
+
+
+
+
+{% endblock head %}
+

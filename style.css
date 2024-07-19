@@ -1,0 +1,266 @@
+@import url("https://fonts.googleapis.com/css2?family=Cookie&family=Lato&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Cardo&family=Cookie&family=Lato&display=swap");
+
+@import url('https://fonts.googleapis.com/css2?family=Cardo&family=Cookie&family=Lato&family=Open+Sans:wght@700&display=swap');
+
+@import url('https://fonts.googleapis.com/css2?family=Cardo:wght@700&family=Cookie&family=Lato&family=Open+Sans:wght@700&display=swap');
+.carousel-item img {
+  background-size: cover;
+  /* width: 100vw; */
+  /* height: 150vh; */
+}
+/* .card-img-top{ */
+/* width: 100px; 
+    height: auto; 
+    bottom: 140px;
+left: 50px;
+object-fit: cover;
+
+object-position: center;
+ border: 2px solid #ff511c;
+  background-repeat: no-repeat;
+position: absolute;
+box-shadow: 0 15px 15px #faad96; border-radius: 50%; */
+
+/* height: 12px; */
+
+/* } */
+
+body {
+  margin: 0; /* Remove default margin */
+}
+
+#carouselExample {
+  position: relative;
+}
+
+.carousel-inner {
+  position: relative;
+  width: 100%;
+}
+
+/* .carousel .container { */
+/* position: absolute;
+        top: 50%; 
+        left: 50%; 
+        transform: translate(-50%, -50%);  */
+/* } */
+
+.card {
+  background-color: white; /* Adjust background color and opacity */
+  padding: 20px; /* Add padding for content inside the card */
+}
+
+.card-imgg {
+  width: 82px;
+}
+
+.container {
+  z-index: 1;
+  margin-top: -5%;
+}
+
+.container4 {
+  height: auto;
+  padding: 2%;
+}
+
+.half1 {
+  font-family: "Cookie", cursive;
+  color: red;
+}
+.half2 {
+  font-family: "Cardo", serif;
+  color: black;
+}
+
+.container4 {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 8% 0px;
+}
+
+.container5 {
+  background-image: url("images/bk2.2.jpg");
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 8% 0px;
+  height: 80vh;
+ 
+}
+
+.half2-1 {
+    font-family: "Cookie", cursive;
+    color: #D5CAB8;
+  }
+  .half2-2{
+    font-family: "Cardo", serif;
+    color: white;
+  }
+  
+  .container6 {
+    height: auto;
+    padding: 2%;
+    display: flex;
+    justify-content: center;
+  text-align: center;
+  flex-direction: column;
+  margin: 8% 0px;
+
+  }
+
+  .half3-1 {
+    font-family: "Cookie", cursive;
+    color: red;
+  }
+  .half3-2{
+    font-family: "Cardo", serif;
+    color: black;
+  }
+
+  .container7{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    
+  }
+  .cn7-btn{
+   color: #7E8690;;
+  }
+
+
+  .container8{
+    height: auto;
+    padding: 2%;
+    display: flex;
+    /* justify-content: center;
+    flex-direction: column; */
+    
+  }
+
+  btn-dark:hover{
+    background-color: red !important;
+  }
+
+  
+  .cn-btn-8{
+    display: flex;
+    justify-content: center;
+    text-align: center;
+    align-items: center;
+    margin: auto;
+  }
+  .container9{
+    height: auto;
+    padding: 2%;
+    margin: 10% 0px;
+    display: flex;
+    justify-content: space-evenly;
+    
+
+  }
+  .mob-img{
+    position: absolute;
+   height: 120vh;
+   z-index: 2;
+   left: 35vh;
+  }
+  /* .mob-in-img{
+    height: 113vh;
+  position: absolute;
+  left: 37vh;
+  width: 25vw;
+  /* top: 910vh; */
+  /* margin-top: 25px; */
+  /* } */ 
+
+  .h9-1{
+    font-family: "Cookie", cursive;
+    color: red;
+
+  }
+  .h9-2{
+    font-family: "Cardo", serif;
+    color: black;
+  }
+  .p9-1{
+    color: #868690;
+  }
+  .half9-2{
+    margin: 14% 0;
+  }
+
+  .btn9-1{
+    font-family: 'Open Sans', sans-serif;
+  }
+  .btn9-2{
+    font-family: 'Open Sans', sans-serif;
+  }
+  .container10{
+    background-size: cover;
+    height: auto;
+    margin: 5% 0% 0% 0%;
+  }
+  .half10-1 {
+    /* min-height: 100vh; */
+    display: flex;
+    /* place-items: center; */
+    justify-content: left;
+    height: 350px;
+    margin: auto;
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    position: absolute;
+  height: 120vh;
+  /* z-index: 2; */
+  /* left: 35vh; */
+  }
+  .slide-img {
+    display: flex;
+    flex-direction: row;
+    justify-content: right;
+    width: calc(250px * 18);
+    animation: scroll 120s linear infinite;
+    background-size: cover;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-250px * 9));
+    }
+  }
+  .s-img {
+    height: 300px;
+    width: auto;
+  }
+  .btn-10{
+    position: absolute;
+    z-index: 1;
+    left: 50%;
+    margin-top: 11%;
+    width: 25vh;
+    font-family: 'Cardo', serif;
+    /* display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center; */
+  }
+
+
+  .container12{
+    background-color: #151515;
+    height: auto; 
+    padding: 2%; 
+     margin: 8% 0%;
+    
+  }

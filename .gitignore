@@ -1,0 +1,26 @@
+# Python virtual environment
+.env/
+venv/
+
+# Environment configuration files
+*.env
+*.json
+*.yaml
+
+# Django secret files
+settings.py
+
+# IDE or editor files
+.vscode/
+.idea/
+*.suo
+*.user
+*.userosscache
+*.sln.docstates
+
+# OS-generated files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log

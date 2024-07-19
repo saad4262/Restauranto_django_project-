@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dine in Form</title>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'MenuItems.css' %}">
+  </head>
+  {% load tailwind_tags %}
+<body>
+    {% tailwind_css %}
+    <div class="p-10 ">
+        <h1 class="mb-8 font-extrabold text-4xl flex justify-center items-center">Checkout</h1>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <form method="post" class="md:order-2">
+                {% csrf_token %}
+                <div class="mt-4  flex flex-col bg-gray-100 rounded-lg p-4 shadow-sm">
+                    <h2 class="text-black font-bold text-lg">Dine in with us</h2>
+                    {{ form.as_p }}
+                    <div class="mt-4 flex justify-end">
+                        <button class="bg-white text-black rounded-md px-4 py-1 hover:bg-gray-200 hover:text-gray-900" type="submit">Submit</button>
+                    </div>
+                </div>
+            </form>
+        
+            
+            <aside class="">
+                <h2 class="text-black font-bold text-lg">Order summary</h2>
+                   <div class="bg-gray-100 p-8 rounded">
+ 
+                     <div class="flow-root">
+ 
+                 <ul class="-my-8">
+                    {% for item in items %}
+                   <li class="flex flex-col space-y-3 py-6 text-left sm:flex-row sm:space-x-5 sm:space-y-0">
+                     <div class="shrink-0">
+                     <img class="h-24 w-24 max-w-full rounded-lg object-cover" src="{{ item.product.image.url }}" alt="">
+                     </div>
+ 
+                     <div class="relative flex flex-1 flex-col justify-between">
+                       <div class="sm:col-gap-5 sm:grid sm:grid-cols-2">
+                         <div class="pr-8 sm:pr-5">
+                           <p class="text-base font-semibold text-gray-900">{{ item.product.product_name }}</p>
+                           <p class="mx-0 mt-1 mb-0 text-sm text-gray-400">Pkr {{ item.product.price }}</p>
+                         </div>
+ 
+                         <div class="mt-4 flex items-end justify-between sm:mt-0 sm:items-start sm:justify-end">
+                           <p class="shrink-0 w-20 text-base font-semibold text-gray-900 sm:order-2 sm:ml-8 sm:text-right">Pkr {{ item.get_total }}</p>
+ 
+                           <div class="sm:order-1">
+                             <div class="mx-auto flex h-8 items-stretch text-gray-600">
+                               <div class="flex w-full items-center justify-center bg-gray-100 px-4 text-xs uppercase transition">{{ item.quantity }}</div>
+                             </div>
+                           </div>
+                         </div>
+                       </div>
+ 
+                      
+                     </div>
+                   </li>
+ 
+                     {% endfor %}
+                 </ul>
+               </div>
+               
+ 
+                 </div>
+             </aside>
+            </div>
+             <div class="mt-6 border-t border-b py-2">
+            <div class="flex items-center justify-between">
+              <p class="text-sm text-gray-400">Subtotal</p>
+              <p class="text-lg font-semibold text-gray-900">{{ order.get_cart_total }} Pkr</p>
+            </div>
+            <div class="flex items-center justify-between">
+              <p class="text-sm text-gray-400">Shipping</p>
+              <p class="text-lg font-semibold text-gray-900">99.00</p>
+            </div>
+          </div>
+             <div class="mt-6 flex items-center justify-between">
+                <p class="text-sm font-medium text-gray-900">Total</p>
+                <p class="text-2xl font-semibold text-gray-900"><span class="text-xs font-normal text-gray-400">Pkr</span>  {{ order.get_cart_total }} </p>
+              </div>
+    
+ 
+    </div>
+    <script src="{% static 'fastfood.js' %}"></script>
+</body>
+</html>

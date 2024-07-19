@@ -1,0 +1,1087 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+    <link rel="stylesheet" href="/static/style2.css">
+    <link rel="stylesheet" href="/static/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto|Varela+Round">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
+    {% comment %} <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"> {% endcomment %}
+    <link rel="stylesheet" href="/static/MenuItems.css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
+
+     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+
+    {% load static tailwind_tags %}
+</head>
+
+{% comment %} 
+<style>
+    .modal { display: none; position: fixed; z-index: 1; left: 0; top: 0; width: 100%; height: 100%; overflow: auto; background-color: rgb(0,0,0); background-color: rgba(0,0,0,0.4); }
+    .modal-content { background-color: #fefefe; margin: 15% auto; padding: 20px; border: 1px solid #888; width: 80%; }
+    .close { color: #aaa; float: right; font-size: 28px; font-weight: bold; }
+    .close:hover, .close:focus { color: black; text-decoration: none; cursor: pointer; }
+</style> {% endcomment %}
+<SCRIPT type="text/javascript" >
+    let user= '{{request.user}}'
+    
+    function getToken(name) {
+       let cookieValue = null;
+       if (document.cookie && document.cookie !== '') {
+           var cookies = document.cookie.split(';');
+           for (let i = 0; i < cookies.length; i++) {
+               const cookie = cookies[i].trim();
+               if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                   cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                   break;
+               }
+           }
+       }
+       return cookieValue;
+   }
+   var csrftoken = getToken('csrftoken');
+
+
+
+   document.addEventListener('DOMContentLoaded', () => {
+       const search1Form = document.querySelector('.search1 form');
+       search1Form.addEventListener('submit', (event) => {
+           event.preventDefault();
+           const search1Input = document.querySelector('.search1 input');
+           const search1Value = search1Input.value.trim();
+           // Redirect to the menu view with the search1 query as a parameter
+           window.location.href = `/menu_view/?search1=${search1Value}`;
+       });
+   });
+   
+</SCRIPT>
+
+<body >
+    {% tailwind_css %}
+
+    <div class="container">
+        <div class="navigation ">
+           
+            <ul>
+                <li>
+                    <a href="#">
+                        {% comment %} <span class="icon">
+                            <ion-icon name="logo-apple"></ion-icon>
+                        </span> {% endcomment %}
+                        <span class="title"><img class=" pr-10 my-5 w-64 sm:w-80" src="\static/images/logo.png" alt="">
+                        </span>
+                    </a>
+                </li>
+
+                <li>
+                    <a id="main-dashboard" href="#">
+                        <span class="icon">
+                            <ion-icon name="home-outline"></ion-icon>
+                        </span>
+                        <span class="title">Dashboard</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a id="main-customer" href="#">
+                        <span class="icon">
+                            <ion-icon name="people-outline"></ion-icon>
+                        </span>
+                        <span class="title">Client Reviews</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a id="main-message" href="#">
+                        <span class="icon">
+                            <ion-icon name="chatbubble-outline"></ion-icon>
+                        </span>
+                        <span class="title">Complains</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a id="main-help"  href="#" class="ml-5">
+                        <span class="icon ">
+                            <svg class="filter brightness-0 invert my-4 " xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                <path d="M18 13C20.2091 13 22 11.2091 22 9C22 6.79086 20.2091 5 18 5C17.1767 5 16.4115 5.24874 15.7754 5.67518M6 13C3.79086 13 2 11.2091 2 9C2 6.79086 3.79086 5 6 5C6.82332 5 7.58854 5.24874 8.22461 5.67518M15.7754 5.67518C15.2287 4.11714 13.7448 3 12 3C10.2552 3 8.77132 4.11714 8.22461 5.67518M15.7754 5.67518C15.9209 6.08981 16 6.53566 16 7C16 7.3453 15.9562 7.68038 15.874 8M9.46487 7C9.15785 6.46925 8.73238 6.0156 8.22461 5.67518" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M6 17.5C7.59905 16.8776 9.69952 16.5 12 16.5C14.3005 16.5 16.401 16.8776 18 17.5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M5 21C6.86556 20.3776 9.3161 20 12 20C14.6839 20 17.1344 20.3776 19 21" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                                <path d="M18 12V20M6 12V20" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" />
+                            </svg>
+                        </span>
+                        <span class="title">Chefs</span>
+                    </a>
+                </li>
+
+                <li>
+                    <a id="main-settings"  href="#">
+                        <span class="icon">
+                            <ion-icon name="pizza-outline"></ion-icon>                       
+                         </span>
+                        <span class="title">Products</span>
+                    </a>
+                </li>
+                
+                {% comment %} <li>
+                    <a id="main-order"  href="#">
+                        <span class="icon">
+                            <ion-icon name="pizza-outline"></ion-icon>                       
+                         </span>
+                        <span class="title">Order Receipt</span>
+                    </a>
+                </li>
+                 {% endcomment %}
+
+                <li>
+                    <a id="main-password"  href="#">
+                        <span class="icon">
+                            <ion-icon name="bookmarks-outline"></ion-icon>                  
+                              </span>
+                        <span class="title">Reservations</span>
+                    </a>
+                </li>
+                <li>
+                    <a id="main-applicants"  href="#">
+                        <span class="icon">
+                            <ion-icon name="people-circle-outline"></ion-icon>                             </span>
+                        <span class="title">Applicants</span>
+                    </a>
+                </li>
+                
+                <li>
+                    <a id="main-admin"  href="#">
+                        <span class="icon">
+                            <ion-icon name="person-outline"></ion-icon>  
+                                                </span>
+                        <span class="title">Admin</span>
+                    </a>
+                </li>
+              
+                <li>
+                    <a href="{% url 'logout' %} " class="logout-link">
+                        <span class="icon">
+                            <ion-icon name="log-out-outline"></ion-icon>
+                        </span>
+                        <span class="title">Logout</span>
+                    </a>
+                </li>
+            </ul> 
+            
+        </div>
+
+        <div id="main-dashboard-data" class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+
+          
+            <div class="cardBox">
+                <div class="card1 w-64">
+                    <div>
+                        <div class="numbers">1,504</div>
+                        <div class="cardName">Users</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="eye-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card1 w-64">
+                    <div>
+                        <div class="numbers">80</div>
+                        <div class="cardName">Orders</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="cart-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card1 w-64">
+                    <div>
+                        <div class="numbers">284</div>
+                        <div class="cardName">Client Reviews</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="chatbubbles-outline"></ion-icon>
+                    </div>
+                </div>
+
+                <div class="card1 w-64">
+                    <div>
+                        <div class="numbers">77,842 rs</div>
+                        <div class="cardName">Earning</div>
+                    </div>
+
+                    <div class="iconBx">
+                        <ion-icon name="cash-outline"></ion-icon>
+                    </div>
+                </div>
+            </div>
+
+            <div class="details">
+                <div class="recentOrders">
+                    <div class="cardHeader">
+                        <h2>Recent Orders</h2>
+                        <a href="#" class="btn">View All</a>
+                    </div>
+
+ 
+    <div class="container lg:w-full ">
+        <canvas id="myChart"></canvas>
+    </div>
+    <script>
+        const data = {
+            labels: ['January', 'February', 'March', 'April', 'May', 'June'],
+            datasets: [{
+                label: 'Orders',
+                data: [350, 100, 120, 200,250, 300,350,70,290, 500],
+                backgroundColor: 'gray',
+                borderColor: 'gray',
+                borderWidth: 1,
+                barThickness: 40
+                
+            }]
+        };
+
+        const config = {
+            type: 'bar',
+            data: data,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        };
+
+        const myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+    </script>
+                </div>
+
+                <div class="recentCustomers">
+                    <div class="cardHeader">
+                        <h2>Recent Customers</h2>
+                    </div>
+
+                    <table>
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/saad-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Saad <br> <span>Sahiwal</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/ahmed-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Ahmed <br> <span>Karachi</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/arham-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Arham <br> <span>Lahore</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/asif-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Asif <br> <span>Uganda</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/usman-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Usman <br> <span>Argentina</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/ramisha-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Ramihsa <br> <span>Islamabad</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/nihal-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Nihal <br> <span>Okara</span></h4>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td width="60px">
+                                <div class="imgBx"><img src="/static/images/muneeba-img.jpg" alt=""></div>
+                            </td>
+                            <td>
+                                <h4>Muneeba <br> <span>Chichawatni</span></h4>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </div>
+
+
+        <div id="main-customer-data" class="main">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+            
+            {% comment %} <div class="container7 p-20 flex gap-20 overflow-hidden flex-col w-full">
+                <h1 class="text-5xl my-3 font-bold text-yellow-500 flex justify-center items-center transition duration-3000 ease-in-out hover:scale-105">Our Clients Say!!!</h1>
+                 {% endcomment %}
+                 <h1 class="text-5xl mt-20 mb-10 font-bold text-[#282A2F] flex flex-col justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Client Reviews</h1>
+                <div class="full-con8 flex flex-wrap gap-20 p-10 lg:justify-start justify-center items-center">
+
+                  {% for contact in contacts %}
+                  <div class="card7 h-72" style="--rating:90">
+                    <div class="icon">
+                      <img class="h-20 w-20 relative bottom-16 left-12 rounded-full bg-center bg-cover" src="/static/images/no-profile.jpg" alt="">
+                    </div>
+                    <div class="title transition duration-3000 ease-in-out relative bottom-16 left-[72px] hover:scale-105 hover:text-yellow-500 cursor-pointer">{{ contact.name }}</div>
+                    <p class="description text-xs relative bottom-14">{{ contact.message }}</p>
+                    {% comment %} <div class="rating relative bottom-8 left-10" data-rating="4">★★☆☆☆</div> {% endcomment %}
+                    <div class="col-span-2 my-4 text-xs flex justify-center rounded-md">{{ contact.email }}</div>
+                  </div>
+                  {% endfor %}
+                </div>
+              </div>
+                          
+
+
+
+        </div>
+        
+        <div  id="main-message-data" class="main">
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+            
+        {% comment %} <li>{{ item.name }} - {{ item.email }} - {{ item.message }}</li> {% endcomment %}
+      
+
+
+                <h1 class="text-5xl mt-20 font-bold text-[#282A2F] flex flex-col justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Complains</h1>
+        <section class="text-gray-600 body-font flex">
+            <div class="container px-5 pt-24 mx-auto">
+                <div class="flex flex-wrap sm:-m-4 mx-4 mb-10 mt-4 md:space-y-0 space-y-6 ">
+                    {% for item in help %}
+                    <div class="px-4 py-8 md:w-1/3 flex">
+                        <div class="w-12 h-12 inline-flex items-center justify-center rounded-full bg-indigo-100 text-indigo-500 mb-4 flex-shrink-0">
+                            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" color="#000000" fill="none">
+                                <path d="M6.57757 15.4816C5.1628 16.324 1.45336 18.0441 3.71266 20.1966C4.81631 21.248 6.04549 22 7.59087 22H16.4091C17.9545 22 19.1837 21.248 20.2873 20.1966C22.5466 18.0441 18.8372 16.324 17.4224 15.4816C14.1048 13.5061 9.89519 13.5061 6.57757 15.4816Z" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" />
+                                <path d="M16.5 6.5C16.5 8.98528 14.4853 11 12 11C9.51472 11 7.5 8.98528 7.5 6.5C7.5 4.01472 9.51472 2 12 2C14.4853 2 16.5 4.01472 16.5 6.5Z" stroke="currentColor" stroke-width="1.5" />
+                            </svg>
+                        </div>
+                        <div class="flex-grow pl-6">
+                            <h2 class="text-gray-900 text-lg title-font font-medium mb-2">{{ item.name }}</h2>
+                            <p class="leading-relaxed text-base text-black">{{ item.message }}</p>
+                            <a class="mt-3 text-indigo-500 inline-flex items-center">{{ item.email }}</a>
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+        
+
+        </div>
+        <div id="main-help-data"  class="main">
+
+            <div class="topbar bg-gray-200">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+           
+         <div class="con16">
+            <div class="container15 flex justify-center items-center p-5 bg-gray-200">
+                <div class="table-wrapper ">
+                    <div class="table-title">
+                        <div class="row">
+                            {% comment %} <div class="col-sm-6">
+                                <h2>Manage Chefs</b></h2>
+                            </div> {% endcomment %}
+                            <div class="col-sm-6">
+                                <div class="flex justify-center ">
+                                    <button onclick="openModal()" class="bg-gray-700  px-4 py-2 rounded-lg w-1/2 hover:bg-blue-600">Add Chef</button>
+                                </div>
+                                {% comment %} <a href="#addEmployeeModal" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New Employee</span></a> {% endcomment %}
+                            </div>
+                        </div>
+                    </div>
+                    <table class="table table-striped table-hover">
+                        <thead>
+                            <tr>
+                                <th>Image</th>
+                                <th>Name</th>
+                                <th>Title</th>
+                                <th class="sm:block hidden">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for i in emp %}
+                            <tr>
+                                <td>{% if i.image %}<img  src="{{ i.image.url }}" alt="Image" style="width: 50px; height: auto;">{% else %}No Image{% endif %}</td>
+                                <td>{{ i.name }}</td>
+                                <td>{{ i.title }}</td>
+                                 <td class="sm:block  hidden">
+                                    
+                                    <a href="#editEmployeeModal-{{ forloop.counter }}" class="edit " data-toggle="modal"><i class="material-icons" data-toggle="" title="Edit">&#xE254;</i></a>
+                                    <a href="#deleteEmployeeModal-{{ i.id }}" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="" title="Delete">&#xE872;</i></a>
+                                </td> 
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            
+            
+            
+            <!-- Add Modal HTML -->
+            <div id="addChefModal" class="hidden fixed inset-0 bg-gray-600 bg-opacity-50 overflow-y-auto h-full w-full">
+                <div class="relative min-h-screen flex items-center justify-center py-12 px-4 sm:px-6 lg:px-8 bg-no-repeat bg-cover">
+                    <div class="absolute opacity-60 inset-0 z-0"></div>
+                    <div class="max-w-md w-full space-y-8 p-10 bg-white rounded-xl shadow-lg z-10">
+                        <div class="grid gap-8 grid-cols-1">
+                            <div class="flex flex-col">
+                                <div class="flex flex-row items-center justify-between">
+                                    <h2 class="font-semibold text-lg mr-auto">Add Chefs</h2>
+                                    <button onclick="closeModal()" class="text-gray-600  hover:text-gray-900">&times;</button>
+                                </div>
+                                <div class="mt-5">
+                                    <div class="form">
+                                        <form method="POST" enctype="multipart/form-data">
+                                            {% csrf_token %}
+                                            <div class="md:space-y-2 mb-3">
+                                                <label class="text-xs font-semibold text-gray-600 py-2">Restauranto<abbr class="hidden" title="required">*</abbr></label>
+                                                <div class="flex items-center py-6">
+                                                    <div class="w-12 h-12 mr-4 flex-none rounded-xl border overflow-hidden">
+                                                        <img id="preview_img" class="w-12 h-12 object-cover" src="/static/images/no-profile.jpg" alt="Avatar Upload">
+                                                    </div>
+                                                    <label class="cursor-pointer">
+                                                        <span class="focus:outline-none text-white text-sm py-2 px-4 rounded-full bg-yellow-500 hover:bg-yellow-500 hover:shadow-lg">Upload</span>
+                                                        <input id="id_image" type="file" name="image" class="hidden" accept="image/*" onchange="loadFile(event)">
+                                                    </label>
+                                                </div>
+                                                <div id="imageName" class="hidden">
+                                                    <span>Selected file: <span id="imageNameText"></span></span>
+                                                </div>
+                                            </div>
+                                            <div class="md:flex flex-row md:space-x-4 w-full text-xs">
+                                                <div class="mb-3 space-y-2 w-full text-xs">
+                                                    <label class="font-semibold text-gray-600 py-2">Name</label>
+                                                    {{ form.name }}
+                                                </div>
+                                                <div class="mb-3 space-y-2 w-full text-xs">
+                                                    <label class="font-semibold text-gray-600 py-2">Title</label>
+                                                    {{ form.title }}
+                                                </div>
+                                            </div>
+                                            <div class="mt-5 text-right md:space-x-3 md:block flex flex-col-reverse">
+                                                <button type="button" onclick="closeModal()" class="mb-2 md:mb-0 bg-white px-5 py-2 text-sm shadow-sm font-medium tracking-wider border text-gray-600 rounded-full hover:shadow-lg hover:bg-gray-100">Cancel</button>
+                                                <button type="submit" class="mb-2 md:mb-0 bg-yellow-500 px-5 py-2 text-sm shadow-sm font-medium tracking-wider text-white rounded-full hover:shadow-lg hover:bg-yellow-500">Add</button>
+                                            </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+<!-- Combined Edit and Delete Modal HTML -->
+<div class="container6 px-16 py-10 flex gap-10 justify-center items-center flex-wrap bg-gray-200">
+    <h1 class="text-5xl my-3 font-bold text-[#282A2F] flex flex-col justify-center items-center transition duration-300 ease-in-out hover:scale-105">Manage Chefs</h1>
+    
+    <div class="full-con6 flex gap-4 flex-wrap justify-center items-center">
+        {% for i in emp %}
+        <div class="card6 my-5" id="chef-card-{{ i.id }}">
+            <div class="card-photo6">
+                {% if i.image %}
+                    <img class="rounded-full" src="{{ i.image.url }}" alt="{{ i.title }}">
+                {% else %}
+                    <p>No image available</p>
+                {% endif %}
+            </div>
+            {% comment %} <div class="card-title6 font-bold hover:text-yellow-500 cursor-pointer">{{ i.name }}<br>
+                <span class="font-normal">{{ i.title }}</span>
+            </div> {% endcomment %}
+            <!-- Update Form -->
+          
+            <form action="{% url 'update' i.id %}" method="post" enctype="multipart/form-data" >
+                {% csrf_token %}
+                <div class="grid grid-cols-1 gap-2">
+                    <label class="cursor-pointer">
+                        <span class="focus:outline-none flex justify-center text-white text-sm py-2 px-4 rounded-full bg-gray-700 hover:bg-gray-800 hover:shadow-lg">Upload</span>
+                        {{ form.image }}
+
+                    </label>
+                
+                <div id="imageName" class="hidden">
+                    <span>Selected file: <span id="imageNameText"></span></span>
+                </div>
+                    <div class="flex flex-col">
+                        <input type="text" name="name" value="{{ i.name }}" id="id_name" class="rounded-lg border  border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                    <div class="flex flex-col">
+                        <input type="text" name="title" value="{{ i.title }}" id="id_title" class="rounded-lg border  border-gray-300 p-2 focus:outline-none focus:ring-2 focus:ring-blue-500">
+                    </div>
+                </div>
+                <div class="flex gap-8 ">
+                <input type="submit" class="mt-4 cursor-pointer ml-6 bg-yellow-500 text-gray-900 p-2 rounded" value="Save">
+            </form>
+            <!-- Delete Form -->
+            <form action="{% url 'delete' i.id %}" method="post" class="w-full mt-4">
+                {% csrf_token %}
+                <input type="submit" class="cursor-pointer ml-10 bg-red-500 text-white p-2 rounded" value="Delete">
+            </form>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+</div>
+{% comment %} 
+    <div id="edit-modal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="edit-form" method="POST" enctype="multipart/form-data">
+                {% csrf_token %}
+                <input type="text" id="name" name="name" value="{{ chef.name }}">
+                <input type="text" id="title" name="title" value="{{ chef.title }}">
+                <input type="file" id="image" name="image">
+                <button type="submit">Save Changes</button>
+            </form>
+        </div>
+    </div>
+     {% endcomment %}
+
+
+    {% comment %} <div class="container6 px-16 py-10 flex gap-10 justify-center items-center flex-wrap bg-gray-200">
+        <h1 class="text-5xl my-3 font-bold text-[#282A2F] flex flex-col justify-center items-center transition duration-3000 ease-in-out hover:scale-105">OUR Master Chefs</h1>
+        
+        <div class="full-con6 flex gap-4 flex-wrap justify-center items-center">
+            {% for n in ChefModels %}
+                <div class="card6" id="chef-card-{{ n.id }}">
+                    <div class="card-photo6">
+                        {% if n.image %}
+                            <img class="rounded-full" src="{{ n.image.url }}" alt="{{ n.title }}">
+                        {% else %}
+                            <p>No image available</p>
+                        {% endif %}
+                    </div>
+                    <div class="card-title6 font-bold hover:text-yellow-500 cursor-pointer">{{n.name}}<br>
+                        <span class="font-normal">{{n.title}}</span>
+                    </div>
+                    <div class="card-socials6">
+                        <button class="edit-btn" data-chef-id="{{ chef.pk }}">Edit</button> <!-- Move the Edit button here -->
+                    </div>
+                    <form action="{% url 'delete_profile' n.id %}" method="post">
+                        {% csrf_token %}
+                        <button type="submit" class="mt-4 bg-red-500 text-white p-2 rounded">Delete</button>
+                    </form>
+                </div>
+            {% endfor %}
+        </div>
+
+         {% endcomment %}
+    {% comment %} <div class="chef-cards">
+        {% for chef in chefs %}
+            <div class="chef-card">
+                <h3>{{ chef.name }}</h3>
+                <p>{{ chef.title }}</p>
+                <button class="edit-btn" data-chef-id="{{ chef.id }}">Edit</button>
+            </div>
+        {% endfor %}
+    </div> {% endcomment %}
+    </div>
+
+    <!-- Modal HTML embedded directly into document -->
+   
+
+  
+
+   
+
+    {% comment %} </div> {% endcomment %}
+
+    <!-- Modal HTML embedded directly into document -->
+     </div>
+        <div id="main-settings-data" class="main">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+           
+            
+              
+            {% comment %} <div class="flex flex-row justify-around lg:my-5 my-14 lg:ml-96 ml-56 ">
+                <form action="" method="GET" class="search1">
+                    <label>
+                        <input type="text" name="search1" placeholder="search1 here" value="{{ request.GET.search1 }}">
+                        <button type="submit"><ion-icon name="search1-outline"></ion-icon></button>
+                    </label>
+                </form>
+                
+                <div class="flex self-end  gap-2 mb-6 ">
+                    <img src="/static/images/profile.svg" alt="">
+                    <a href="{% url 'cart' %}"><img src="/static/images/cart.svg" alt=""></a> 
+                    <p>{{ cartItems }}</p>
+                </div>
+            </div>
+             {% endcomment %}
+            <div class="flex justify-center gap-4 ">
+                
+                    <div class="flex">
+                        {% comment %} <h1 class=" heading font-black font-bolder font-serif align-middle justify-center ">Our Menu</h1> {% endcomment %}
+                        </div>
+                      
+                </div>
+                <div class="selector flex justify-center gap-6 font-bold my-5">
+            
+                <a href="?category=FastFood"><button class="btn" {% if category == "FastFood" %} {% endif %}> Fast Food </button> </a>
+                <a href="?category=Continental"><button class="btn" {% if category == "Continental" %}  {% endif %} >Continental </button> </a> 
+                <a href="?category=PakistaniCuisine"><button class="btn" {% if category == "PakistaniCuisine" %}  {% endif %}>Pakistani Cuisine</button> </a>
+                <a href="?category=Desserts"><button class="btn" {% if category == "Desserts" %}  {% endif %}>Desserts</button> </a>
+            
+                </div>
+              
+              <div class="Main flex  align-middle justify-center box-border ">
+            
+            
+                 <div id="mainContainer" class=" Container w-auto flex  lg:justify-start justify-center lg:px-32  flex-wrap gap-9">
+                            {% for a in product_messages %}
+                               
+                     <div class="card md:h-80 md:w-72 h-96 w-96">
+                         <div class="card-details">
+                             {% if a.image %}
+                             <img class="Product-img  "  name="product-img" alt="burger image"  src="{{ a.image.url }}">
+                                 {% else %}
+                                 <p>No image available</p>
+                             {% endif %}
+                             <div class="Product-name"> {{ a.product_name }}</div>
+                             <div class="Product-ingredients"> {{ a.ingredients }}</div>
+            
+                             <span class="Product-Price"> {{ a.price }}</span>
+                         </div>
+                         <button class="card-button " id="popupTrigger-{{ forloop.counter }}" > view details </button>
+                     </div>
+                                
+            
+            
+                         <div class="PopupDiv flex flex-col  "  id="popupContainer-{{ forloop.counter }}">
+                         <div class="align-baseline self-end p-3"><img src="/static/images/cancel.svg" alt="" class="close closeTrigger hover:cursor-pointer"  id="closeTrigger-{{ forloop.counter }}"  > </div>
+                          <div class="flex p-2 align-middle">
+            
+                         
+                         <div class="flex flex-col  px-5">
+                            <div class="flex gap-20 text-wrap ">
+                             <div class="Popup-img h-48 bg-cover w-48 overflow-hidden  "><img src="{{ a.image.url }}" alt="burger"></div>
+                             <div class="Popup-detail w-56">{{ a.product_description }}</div>
+                            </div>
+                             <div class="Product-name flex justify-start items-start">{{ a.product_name }}</div>
+                             <span class="Product-Price relative  w-5/12"> {{ a.price }}</span>
+                                     
+                              
+                             {% comment %} <a class="fancy w-10/12" href="#"> <button class="CartBtn">
+                                  <span class="top-key"></span>
+                                  <span data-product="{{ a.id }}" data-action="add" class="text update-cart "  type="submit">Add to Cart</span>
+                                  <span class="bottom-key-1"></span>
+                                  <span class="bottom-key-2"></span> 
+                                  </button>
+                             </a>  {% endcomment %}
+                         </div>
+                          
+                          </div>
+            
+                         </div>
+                            {% endfor %}
+                 
+                 </div>
+               
+            
+            
+            </div>
+            
+            
+        </div>
+        
+
+      
+        <div id="main-password-data" class="main">
+
+
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+           
+            <h1 class="text-5xl my-10  font-bold text-[#282A2F] cursor-pointer flex  justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Reservations</h1>
+
+
+            <section class="text-gray-600 body-font">
+                <div class="container px-5 py-16 mx-auto">
+                  <div class="flex flex-wrap lg:justify-start justify-center m-4">
+                    {% for reservations in reservation %}
+                    <div class="p-4 w-96 lg:w-1/3">
+                      <div class="h-full bg-gray-100 bg-opacity-75 px-8 pt-16 pb-24 rounded-lg overflow-hidden text-center relative">
+                        <div class="flex justify-center">
+                        <ion-icon class="text-indigo-500 px-3 " name="call-outline"></ion-icon>
+
+                        <h2 class="tracking-widest text-xs title-font font-medium text-indigo-500  mb-1">{{ reservations.phone_number }}</h2>
+                    </div>
+                        <h1 class="title-font sm:text-2xl text-xl font-medium text-gray-900 mb-3">{{ reservations.name }}</h1>
+                       <div class="flex gap-2 justify-center">
+                        <p class="text-black">Message :</p> <p class="leading-relaxed mb-3 text-gray-400 ">{{ reservations.message }}</p>
+                    </div>
+                        <a class=" text-gray-400 inline-flex items-center " href="">Email: {{ reservations.email }}
+                         
+                        </a>
+                        <div class="text-center mt-2 leading-none flex justify-center absolute bottom-0 left-0 w-full py-4">
+                          <span class="text-gray-400 mr-3 inline-flex items-center leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+                            Date: {{ reservations.date }}
+                          </span>
+                          <span class="text-gray-400 inline-flex items-center leading-none text-sm">
+                            People: {{ reservations.num_people }}
+                          </span>
+                        </div>
+                      </div>
+                    </div>
+                    {% endfor %}
+                  </div>
+                </div>
+              </section>
+              
+
+
+        </div>
+        <div id="main-applicants-data" class="main">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+           
+            <h1 class="text-5xl my-10  font-bold text-[#282A2F] cursor-pointer flex  justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Applicants</h1>
+
+
+<section class="text-gray-600 body-font overflow-hidden">
+    <div class="container px-5 py-16 mx-auto flex flex-wrap -m-4 ">
+        {% for applicant in applicants %}
+      <div class="p-12 md:w-1/2 flex flex-col items-start ">
+        <span class="inline-block py-1 px-2 rounded bg-indigo-50 text-indigo-500 text-xs font-medium tracking-widest">{{ applicant.email }}</span>
+        <h2 class="sm:text-lg text-lg title-font font-medium text-gray-900 mt-4 mb-4 flex gap-3">Job Type : <p class="text-gray-400  ">{{ applicant.job_type }}</p></h2>
+        <p class="leading-relaxed mb-8">{{ applicant.resume.url }}</p>
+        <div class="flex items-center flex-wrap pb-4 mb-4 border-b-2 border-gray-100 mt-auto w-full">
+            <ion-icon class="text-indigo-500 p-3" name="call-outline"></ion-icon>
+          <a class="text-indigo-500 inline-flex items-center ">{{ applicant.phone }}
+        </a>
+          <span class="text-gray-400 mr-3 inline-flex items-center ml-auto leading-none text-sm pr-3 py-1 border-r-2 border-gray-200">
+            <ion-icon name="cloud-download-outline">
+
+            </ion-icon><a class="p-4" href="{{ applicant.resume.url }}" download>Download CV</a>
+          </span>
+          
+        </div>
+        <a class="inline-flex items-center">
+          <img alt="blog" src="{{ applicant.image.url }}" alt="{{ applicant.name }}" class="w-12 h-12 rounded-full flex-shrink-0 object-cover object-center">
+          <span class="flex-grow flex flex-col pl-4">
+            <span class="title-font font-medium text-gray-900">{{ applicant.name }}</span>
+            <span class="text-gray-400 text-xs tracking-widest mt-0.5">{{ applicant.get_gender_display }}</span>
+          </span>
+        </a>
+      </div>
+
+      {% endfor %}
+    </div>
+  </section>
+
+        </div>
+
+        <div id="main-admin-data" class="main">
+
+            <div class="topbar">
+                <div class="toggle">
+                    <ion-icon name="menu-outline"></ion-icon>
+                </div>
+
+                <div class="search1">
+                    <label>
+                        <input type="text" placeholder="search here">
+                        <ion-icon name="search1-outline"></ion-icon>
+                    </label>
+                </div>
+
+                <div class="user">
+                    <img src="/static/images/saad-img.jpg" alt="">
+                </div>
+            </div>
+           
+            <h1 class="text-5xl my-20  font-bold text-[#282A2F] cursor-pointer flex  justify-center items-center  transition duration-3000 ease-in-out   hover:scale-105">Admins</h1>
+            <div class="flex flex-wrap  gap-10  relative items-center justify-center w-full">
+                {% for profile in admindata %}
+        <div class="rounded-xl overflow-hidden relative text-center p-4 group items-center flex flex-col max-w-sm hover:shadow-2xl transition-all duration-500 shadow-xl">
+            <div class="text-gray-500 flex justify-center h-48 w-56 rounded-full group-hover:scale-105 transition-all">
+                {% if profile.image %}
+                <img class="h-36 w-36 flex justify-center items-center bg-cover rounded-full" src="{{ profile.image.url }}" alt="{{ profile.name }}">
+                {% else %}
+                <p>No image available</p>
+                  {% endif %}
+            </div>
+            <div class="group-hover:pb-10 transition-all duration-500 delay-200">
+                <h1 class="font-semibold text-gray-700">{{ profile.name }}</h1>
+                <p class="text-gray-500 text-sm">{{ profile.email }}</p>
+            </div>
+            <div class="flex items-center transition-all duration-500 delay-200 group-hover:bottom-3 -bottom-full absolute gap-2 justify-evenly w-full">
+              <div class="flex gap-3 text-2xl bg-gray-700 text-white p-1 hover:p-2 transition-all duration-500 delay-200 rounded-full shadow-sm">
+                <a class="hover:scale-110 transition-all duration-500 delay-200">
+                  <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 1024 1024">
+                    <path d="M511.6 76.3C264.3 76.2 64 276.4 64 523.5 64 718.9 189.3 885 363.8 946c23.5 5.9 19.9-10.8 19.9-22.2v-77.5c-135.7 15.9-141.2-73.9-150.3-88.9C215 726 171.5 718 184.5 703c30.9-15.9 62.4 4 98.9 57.9 26.4 39.1 77.9 32.5 104 26 5.7-23.5 17.9-44.5 34.7-60.8-140.6-25.2-199.2-111-199.2-213 0-49.5 16.3-95 48.3-131.7-20.4-60.5 1.9-112.3 4.9-120 58.1-5.2 118.5 41.6 123.2 45.3 33-8.9 70.7-13.6 112.9-13.6 42.4 0 80.2 4.9 113.5 13.9 11.3-8.6 67.3-48.8 121.3-43.9 2.9 7.7 24.7 58.3 5.5 118 32.4 36.8 48.9 82.7 48.9 132.3 0 102.2-59 188.1-200 212.9a127.5 127.5 0 0138.1 91v112.5c.8 9 0 17.9 15 17.9 177.1-59.7 304.6-227 304.6-424.1 0-247.2-200.4-447.3-447.5-447.3z"></path>
+                  </svg>
+                </a>
+                <a class="hover:scale-110 transition-all duration-500 delay-200">
+                  <svg width="1em" height="1em" viewBox="0 0 24 24" stroke="currentColor" fill="none">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path>
+                    <path d="M22 6l-10 7L2 6"></path>
+                  </svg>
+                </a>
+                <a class="hover:scale-110 transition-all duration-500 delay-200">
+                  <svg width="1em" height="1em" fill="currentColor" viewBox="0 0 960 1000">
+                    <path d="M480 20c133.333 0 246.667 46.667 340 140s140 206.667 140 340c0 132-46.667 245-140 339S613.333 980 480 980c-132 0-245-47-339-141S0 632 0 500c0-133.333 47-246.667 141-340S348 20 480 20M362 698V386h-96v312h96m-48-352c34.667 0 52-16 52-48s-17.333-48-52-48c-14.667 0-27 4.667-37 14s-15 20.667-15 34c0 32 17.333 48 52 48m404 352V514c0-44-10.333-77.667-31-101s-47.667-35-81-35c-44 0-76 16.667-96 50h-2l-6-42h-84c1.333 18.667 2 52 2 100v212h98V518c0-12 1.333-20 4-24 8-25.333 24.667-38 50-38 32 0 48 22.667 48 68v174h98"></path>
+                  </svg>
+                </a>
+              </div>
+            </div>
+        </div>
+        {% endfor %}
+                </div>
+              </div>
+
+
+        </div>
+        
+
+
+    </div>
+
+  <script src="/static/script2.js"></script>
+  <script src="/static/script1.js"></script>
+  {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> {% endcomment %}
+  {% comment %} <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script> {% endcomment %}
+
+
+  <script>
+    
+  function loadFile(event) {
+    var image = document.getElementById('preview_img');
+    var imageName = document.getElementById('imageName');
+    var imageNameText = document.getElementById('imageNameText');
+
+    image.src = URL.createObjectURL(event.target.files[0]);
+    image.onload = function() {
+        URL.revokeObjectURL(image.src); // free memory
+    }
+
+    imageName.style.display = 'block';
+    imageNameText.textContent = event.target.files[0].name;
+}
+
+document.getElementById('id_image').addEventListener('change', loadFile);
+
+
+
+
+
+
+
+
+$(document).ready(function(){
+	// Activate tooltip
+	$('[data-toggle="tooltip"]').tooltip();
+	
+	// Select/Deselect checkboxes
+	var checkbox = $('table tbody input[type="checkbox"]');
+	$("#selectAll").click(function(){
+		if(this.checked){
+			checkbox.each(function(){
+				this.checked = true;                        
+			});
+		} else{
+			checkbox.each(function(){
+				this.checked = false;                        
+			});
+		} 
+	});
+	checkbox.click(function(){
+		if(!this.checked){
+			$("#selectAll").prop("checked", false);
+		}
+	});
+});
+
+
+
+
+
+function previewImage1(event, id) {
+    var reader = new FileReader();
+    reader.onload = function() {
+        var output = document.getElementById('image-preview-' + id);
+        if (output.tagName === 'IMG') {
+            output.src = reader.result;
+        } else {
+            output.src = reader.result;
+            output.innerHTML = '<img class="rounded-full" src="' + reader.result + '" alt="Image preview">';
+        }
+    }
+    reader.readAsDataURL(event.target.files[0]);
+}
+
+
+
+
+  </script>
+
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+    
+    
+    <script src="/static/fastfood.js">
+        let user = '{{request.user}}'
+    </script>
+    <script src="/static/cart1.js">
+    </script>
+    
+    <script type="module" src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@5.5.2/dist/ionicons/ionicons.js"></script>
+    
+</body>
+
+</html>

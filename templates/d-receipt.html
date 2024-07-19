@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Order Receipt</title>
+</head>
+<body>
+    <h1>Order Receipt</h1>
+    <p>Thank you for your order. Here are the details:</p>
+
+    <h2>Shipping Information</h2>
+    <p>Name: {{ information.name }}</p>
+    <p>Email: {{ information.email }}</p>
+    <p>Number: {{ information.number }}</p>
+    <p>Address: {{ information.address }}</p>
+    <p>City: {{ information.city }}</p>
+    <p>Province: {{ information.province }}</p>
+    <p>Zipcode: {{ information.zipcode }}</p>
+    <p>Instruction: {{ information.instruction }}</p>
+
+    <div class="order-summary">
+        <h2>Order Summary</h2>
+        <ul>
+            {% for item in items %}
+            
+            <li><img class="h-24 w-24 max-w-full rounded-lg object-cover" src="{{ item.product.image.url }}" alt=""> - {{ item.product.product_name }} - Quantity: {{ item.quantity }} - Price: {{ item.product.price }}</li>
+            {% endfor %}
+        </ul>
+        
+        <p class="text-2xl">Total: {{ order.get_cart_total }} Rs</p>
+    </div>
+
+    <p>If you have any questions, please feel free to contact us at restauranto123@gmail.com</p>
+      </div>
+</body>
+</html>
